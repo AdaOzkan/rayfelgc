@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>RAYFELMUN TRACKER</title>
+<title>RayfelGÇ TRACKER</title>
 <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -156,7 +156,7 @@ body.hidden-panels .panel, body.hidden-panels #save-btn{display:none !important;
   <div id="ui-layer">
     <div id="map-container"><div id="map"></div></div>
 
-    <div id="header-pill"><div class="dot"></div><span>RAYFELMUN TRACKER</span><div class="dot"></div></div>
+    <div id="header-pill"><div class="dot"></div><span>RayfelGÇ TRACKER</span><div class="dot"></div></div>
     <div id="search-wrap"><input id="search-input" type="text" placeholder="KONUM ARA..."></div>
 
     <div id="badge-tl" class="corner-badge" title="Konferans Merkezi"><svg width="22" height="22" viewBox="0 0 8 8"><rect x="1" y="1" width="6" height="6" fill="none" stroke="#ffd54f" stroke-width="1"/><rect x="3" y="3" width="2" height="2" fill="#ffd54f"/></svg></div>
@@ -205,7 +205,7 @@ body.hidden-panels .panel, body.hidden-panels #save-btn{display:none !important;
     </svg>
 
     <div id="ticker-bar">
-      <div id="ticker-track"><span id="ticker-text">RAYFELMUN KOMİTE DURUM GÜNCELLEMESİ &nbsp;•&nbsp; TÜM ODALAR ÇEVRİMİÇİ &nbsp;•&nbsp; KROKİ REFERANS NOKTALARI EKLENDİ &nbsp;•&nbsp;</span></div>
+      <div id="ticker-track"><span id="ticker-text">RayfelGÇ KOMİTE DURUM GÜNCELLEMESİ &nbsp;•&nbsp; TÜM ODALAR ÇEVRİMİÇİ &nbsp;•&nbsp; KROKİ REFERANS NOKTALARI EKLENDİ &nbsp;•&nbsp;</span></div>
       <button id="mute-btn" type="button">🔊</button>
     </div>
   </div>
@@ -238,8 +238,8 @@ let pointMarkers = [];
 let overlaysByLayer = {}; 
 let pickMode = false, pickMarker = null;
 
-const POINTS_KEY = 'rayfelmun-tracker-points';
-const LAYERS_KEY = 'rayfelmun-lysa-layers';
+const POINTS_KEY = 'RayfelGÇ-tracker-points';
+const LAYERS_KEY = 'RayfelGÇ-lysa-layers';
 
 const pixelMapStyle = [
   { elementType: "geometry", stylers: [{ color: "#0c2138" }] },
@@ -254,13 +254,13 @@ const pixelMapStyle = [
 
 /* ====================== BOOT SEQUENCE ====================== */
 const bootMessages = [
-  "RAYFELMUN TRACKER v2.0 BAŞLATILIYOR...",
+  "RayfelGÇ TRACKER v2.0 BAŞLATILIYOR...",
   "OKUL YERLEŞKESİ GPS AĞI YÜKLENİYOR...",
   "KROKİ REFERANS KOORDİNATLARI ENTEGRE EDİLİYOR [TAMAM]",
   "GOOGLE HARİTA MOTORU BAĞLANIYOR...",
   "ÇİZİM ARAÇLARI DEVRE DIŞI BIRAKILDI...",
   "BOOT SELF-TEST ÇALIŞTIRILIYOR: BAŞARILI",
-  "RAYFELMUN OPERASYONEL TAKİPÇİSİNE HOŞ GELDİNİZ."
+  "RayfelGÇ OPERASYONEL TAKİPÇİSİNE HOŞ GELDİNİZ."
 ];
 (function boot(){
   const terminal = document.getElementById('terminal-content');

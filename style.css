@@ -142,7 +142,7 @@ nav {
 .hero {
     height: 100vh;
     background: linear-gradient(rgba(10, 20, 35, 0.7), rgba(10, 20, 35, 0.7)), 
-                url('rayfelmun.jpg') no-repeat center center/cover;
+                url('Rayfelmun.jpg') no-repeat center center/cover;
     display: flex;
     justify-content: center;
     align-items: center;
