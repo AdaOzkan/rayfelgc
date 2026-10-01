@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Venue | Rayfelmun '27</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    
+    <link rel="icon" type="image/png" sizes="256x256" href="rayfelmunLogo.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="rayfelmunLogo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="rayfelmunLogo.png">
+    <link rel="apple-touch-icon" href="rayfelmunLogo.png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        @font-face {
+            font-family: 'Northwell';
+            src: url('Northwell.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #142948;
+            overflow-x: hidden;
+        }
+
+        /* --- NAVIGASYON --- */
+        nav {
+            background: linear-gradient(to bottom, #142948 0%, rgb(21,21,30) 100%);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            z-index: 1001;
+        }
+
+        .logo-area img { 
+            height: 50px; 
+            width: auto;
+        }
+
+        .logo-area span {
+            font-family: 'Northwell', cursive;
+            font-size: 34px;
+            color: #ffffff;
+        }
+
+        .menu-toggle {
+            display: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 18px;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            opacity: 0.7;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active { 
+            opacity: 1; 
+            color: #27f4d2;
+        }
+
+        .apply-btn {
+            background-color: #111111;
+            color: white;
+            padding: 10px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border: 1px solid rgba(255,255,255,0.15);
+            transition: 0.3s;
+        }
+
+        .apply-btn:hover {
+            background-color: #ffffff;
+            color: #000;
+            transform: translateY(-2px);
+        }
+
+        /* --- İÇERİK --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 160px 20px 100px 20px;
+            text-align: center;
+        }
+
+        .venue-label {
+            font-family: 'Northwell', cursive;
+            font-size: clamp(60px, 12vw, 80px);
+            color: #142948;
+            margin-bottom: -10px;
+            display: block;
+        }
+
+        .venue-title {
+            font-family: 'Antonio', sans-serif;
+            font-size: clamp(30px, 5vw, 55px);
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            color: #142948;
+            margin-bottom: 50px;
+            font-weight: 700;
+            line-height: 1.1;
+        }
+
+        .location-card {
+            background: linear-gradient(135deg, #142948 0%, #0a1526 100%);
+            color: white;
+            padding: clamp(30px, 8vw, 60px) 25px;
+            border-radius: clamp(30px, 10vw, 50px);
+            margin-bottom: 40px;
+            text-align: center;
+            box-shadow: 0 30px 60px rgba(20, 41, 72, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .location-card h2 {
+            font-family: 'Antonio', sans-serif;
+            font-size: clamp(24px, 6vw, 32px);
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .location-card p {
+            font-size: clamp(14px, 4vw, 18px);
+            opacity: 0.8;
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .map-wrapper {
+            background: #ffffff;
+            padding: 15px;
+            border-radius: clamp(30px, 10vw, 50px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+            margin-bottom: 40px;
+            border: 1px solid #f0f0f0;
+            transition: 0.4s ease;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: clamp(300px, 50vh, 500px);
+            border: 0;
+            border-radius: 25px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .info-card {
+            background-color: #f8f9fa;
+            padding: clamp(25px, 6vw, 40px);
+            border-radius: 30px;
+            text-align: left;
+            border: 1px solid #eee;
+            transition: 0.3s;
+        }
+
+        .info-card h3 {
+            font-family: 'Antonio', sans-serif;
+            font-size: 24px;
+            text-transform: uppercase;
+            color: #142948;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .info-card h3 i { color: #27f4d2; }
+
+        .info-card p {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: rgb(21,21,30);
+            padding: 80px 8% 40px 8%;
+            display: grid;
+            grid-template-columns: 1.8fr 1fr 1fr 1fr;
+            gap: 40px;
+            color: white;
+            align-items: start;
+        }
+
+        .footer-brand img { 
+            width: 250px; 
+            height: auto; 
+            margin-bottom: 25px; 
+            display: block;
+        }
+
+        .footer-brand h2 { 
+            font-family: 'Antonio', sans-serif; 
+            font-size: 36px; 
+            text-transform: uppercase; 
+            line-height: 1.1;
+        }
+
+        /* 26 RAKAMI İÇİN ANTONIO AYARI */
+        .footer-brand h2 span { 
+            color: #27f4d2; 
+            font-family: 'Antonio', sans-serif;
+        }
+
+        .footer-brand p { 
+            opacity: 0.6; 
+            font-style: italic; 
+            margin-top: 10px; 
+            font-size: 15px;
+        }
+
+        .footer-col h4 { 
+            font-size: 12px; 
+            letter-spacing: 2px; 
+            margin-bottom: 25px; 
+            color: #27f4d2; 
+            text-transform: uppercase; 
+        }
+
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 12px; }
+        .footer-col ul li a { 
+            color: white; 
+            text-decoration: none; 
+            opacity: 0.6; 
+            transition: 0.3s; 
+            font-size: 13px; 
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        .footer-col ul li a:hover { opacity: 1; color: #27f4d2; padding-left: 5px; }
+
+        .social-icons { display: flex; gap: 20px; }
+        .social-icons a { color: white; text-decoration: none; }
+        .social-icons i { font-size: 22px; opacity: 0.7; transition: 0.3s; cursor: pointer; }
+        .social-icons i:hover { opacity: 1; color: #27f4d2; transform: translateY(-3px); }
+
+        .bottom-bar {
+            background-color: #65001a;
+            padding: 30px 8%;
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            font-size: 12px;
+            color: rgba(255,255,255,0.5);
+        }
+
+        /* --- MOBIL UYUMLULUK --- */
+        @media (max-width: 992px) {
+            footer { grid-template-columns: 1.5fr 1fr; gap: 50px; }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle { display: block; }
+            
+            .nav-right {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                height: 100vh;
+                background: rgb(21,21,30);
+                flex-direction: column;
+                justify-content: center;
+                transition: 0.4s ease-in-out;
+                box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+                z-index: 1000;
+            }
+
+            .nav-right.active { right: 0; }
+            .nav-links { flex-direction: column; align-items: center; gap: 30px; margin-bottom: 40px; }
+            .nav-links a { font-size: 16px; opacity: 1; }
+            footer { grid-template-columns: 1fr; text-align: center; }
+            .footer-brand img { margin: 0 auto 20px auto; width: 200px; }
+            .social-icons { justify-content: center; }
+            .bottom-bar { flex-direction: column; gap: 15px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo-area">
+            <img src="rayfelmunLogo.jpg" alt="Logo">
+            <span>Rayfelmun</span>
+        </a>
+
+        <div class="menu-toggle" id="mobile-menu">
+            <i class="fas fa-bars"></i>
+        </div>
+
+        <div class="nav-right" id="nav-menu">
+            <ul class="nav-links">
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="about.html">ABOUT</a></li>
+                <li><a href="team.html">TEAM</a></li>
+                <li><a href="committees.html">COMMITTEES</a></li> 
+                <li><a href="calendar.html">CALENDAR</a></li>
+                <li><a href="venue.html" class="active">VENUE</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">CONTACT</a></li>
+            </ul>
+            <a href="apply.html" class="apply-btn">APPLY NOW</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <span class="venue-label">Venue</span>
+        <h1 class="venue-title">Our conference wıll take place ın...</h1>
+
+        <div class="location-card">
+            <h2>Lüleburgaz Yıldızları Sanat Akademisi (LYSA)</h2>
+            <p>İstiklal, Mehmetçik Cd., 39750 Lüleburgaz/Kırklareli</p>
+        </div>
+        
+
+
+        <div class="map-wrapper">
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2844.897657829756!2d27.37226557587902!3d41.39606217129867!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14b4bb461f02f7ed%3A0x73c9e2775754f118!2zTMO8bGVidXJnYXogWcSxbGTEsXpsYXLEsSBTYW5hdCBBa2FkZW1pc2k!5e1!3m2!1str!2str!4v1781273563597!5m2!1str!2str" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                
+            </div>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-card">
+                <h3><i class="fas fa-bus"></i> Publıc Transportatıon</h3>
+                <p>The venue is easily accessible via Lüleburgaz’s local minibus network. The closest public transportation connection is Line 8, which stops at “LYSA and New State Hospital”. Delegates coming from the town center can also reach the venue with a short 10-minute walk.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-brand">
+            <img src="rayfelmunLogo.jpg" alt="Logo">
+            <h2>Rayfelmun<span>26</span></h2>
+            <p>Your voice can change the world</p>
+        </div>
+        <div class="footer-col">
+            <h4>CONFERENCE</h4>
+            <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="about.html">ABOUT</a></li>
+                <li><a href="team.html">TEAM</a></li>
+                <li><a href="committees.html">COMMITTEES</a></li> 
+                <li><a href="calendar.html">CALENDAR</a></li>
+                <li><a href="venue.html">VENUE</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">CONTACT</a></li>
+                <li><a href="apply.html" style="color:#27f4d2;">APPLY NOW</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>LEGAL</h4>
+            <ul>
+                <li><a href="privacy.html">prıvacy polıcy</a></li>
+                <li><a href="terms.html">Terms of Service</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>SOCIAL</h4>
+            <div class="social-icons">
+                <a href="https://www.instagram.com/rayfelmun/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+                <a href="https://www.linkedin.com/school/ramazan-yaman-fen-lisesi/" target="_blank"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="bottom-bar">
+        <div>© Rayfelmun 2026. All rights reserved.</div>
+        <div>Crafted with ❤️ by Ada Özkan</div>
+    </div>
+
+    <script>
+        const menuToggle = document.getElementById('mobile-menu');
+        const navMenu = document.getElementById('nav-menu');
+
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            const icon = menuToggle.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+                navMenu.classList.remove('active');
+                const icon = menuToggle.querySelector('i');
+                if(icon) {
+                    icon.classList.add('fa-bars');
+                    icon.classList.remove('fa-times');
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>

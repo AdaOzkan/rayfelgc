@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>RAYFELMUN TRACKER</title>
+<link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+<style>
+:root{
+  --outer: #4fb8e8;
+  --outer-dark: #2a6fa8;
+  --navy: #0c2138;
+  --navy-deep: #071626;
+  --panel-bg: rgba(9, 26, 45, 0.94);
+  --cyan: #7fe0f0;
+  --gold: #ffd54f;
+  --danger: #ff5577;
+  --confirmed: #6be3ff;
+  --ink: #eaf6ff;
+  --dim: #6f93ad;
+  --font: 'VT323', monospace;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html,body{height:100%; width:100%; overflow:hidden; background:#020a14;}
+body{font-family:var(--font); color:var(--ink);}
+
+#frame{
+  position:absolute; inset:10px;
+  border:6px solid var(--outer);
+  box-shadow:0 0 0 4px var(--navy-deep), 0 0 0 8px var(--outer-dark), 0 0 0 11px var(--outer);
+  background:var(--navy-deep);
+  overflow:hidden;
+}
+
+/* ---------- BOOT SCREEN ---------- */
+#boot-screen{position:absolute; inset:0; z-index:9999; background:#0a1420; padding:56px 40px 0; color:var(--cyan); font-size:1.15rem;}
+.boot-line{margin:7px 0; text-shadow:0 0 6px rgba(127,224,240,0.5); opacity:0.85;}
+.cursor{display:inline-block; width:9px; height:1.1rem; background:var(--cyan); animation:blink 1s step-end infinite; vertical-align:bottom;}
+@keyframes blink{50%{opacity:0;}}
+#boot-rig{position:absolute; top:70px; left:50%; transform:translateX(-50%); text-align:center;}
+#boot-thread{width:2px; height:70px; background:linear-gradient(var(--ink), rgba(234,246,255,0.2)); margin:0 auto;}
+#boot-badge{width:46px; height:46px; margin:0 auto; background:var(--navy); border:3px solid var(--gold); border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 0 14px rgba(255,213,79,0.5);}
+#boot-loadbar-wrap{position:absolute; bottom:56px; left:40px; right:40px; display:flex; gap:10px; align-items:center;}
+#boot-loadbar{flex:1; height:34px; border:3px solid var(--outer-dark); background:var(--navy); position:relative; overflow:hidden;}
+#boot-loadbar-fill{position:absolute; top:0; left:0; bottom:0; width:0%; background:repeating-linear-gradient(90deg, var(--cyan) 0 8px, rgba(127,224,240,0.4) 8px 16px); transition:width 0.2s linear;}
+#boot-loadbar-label{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:1.1rem; letter-spacing:3px; color:var(--ink); text-shadow:0 0 4px #000;}
+.icon-sq{width:34px; height:34px; border:3px solid var(--outer-dark); background:var(--navy); display:flex; align-items:center; justify-content:center;}
+
+/* ---------- UI LAYER ---------- */
+#ui-layer{position:absolute; inset:0; z-index:100; display:none;}
+#map-container{position:absolute; inset:0; z-index:1; background:var(--navy-deep);}
+#map{width:100%; height:100%;}
+
+#header-pill{
+  position:absolute; top:14px; left:50%; transform:translateX(-50%); z-index:150;
+  background:var(--navy); border:3px solid var(--outer); border-radius:6px;
+  padding:8px 22px; display:flex; align-items:center; gap:10px;
+  box-shadow:0 0 0 3px var(--navy-deep), 0 3px 0 rgba(0,0,0,0.4);
+}
+#header-pill .dot{width:14px; height:14px; border-radius:50%; background:var(--gold); box-shadow:0 0 8px var(--gold);}
+#header-pill span{font-size:1.5rem; letter-spacing:3px; color:var(--cyan); text-shadow:0 0 6px rgba(127,224,240,0.6);}
+
+#search-wrap{position:absolute; top:64px; left:50%; transform:translateX(-50%); z-index:150; width:280px;}
+#search-input{
+  width:100%; background:var(--navy); border:2px solid var(--outer-dark); color:var(--ink);
+  padding:6px 10px; font-family:var(--font); font-size:1rem; letter-spacing:0.5px;
+}
+#search-input:focus{outline:none; border-color:var(--cyan);}
+
+.corner-badge{position:absolute; z-index:150; width:52px; height:52px; border:3px solid var(--outer); background:var(--navy); display:flex; align-items:center; justify-content:center;}
+#badge-tl{top:14px; left:14px; border-radius:50%; border-color:var(--gold);}
+#badge-tr{top:14px; right:14px;}
+
+/* panels */
+.panel{position:absolute; z-index:140; background:var(--panel-bg); border:3px solid var(--outer-dark); padding:14px; box-shadow:0 0 0 2px var(--navy-deep);}
+#activity-log{top:78px; left:14px; width:260px; max-height:190px; overflow-y:auto;}
+#layers-panel{top:284px; left:14px; width:260px; max-height:220px; overflow-y:auto;}
+#committee-watch{top:78px; right:14px; width:280px; max-height:calc(100% - 190px); overflow-y:auto;}
+.panel-title{font-size:1.2rem; letter-spacing:2px; color:var(--cyan); margin-bottom:10px; border-bottom:2px dashed rgba(127,224,240,0.3); padding-bottom:6px; text-shadow:0 0 5px rgba(127,224,240,0.4); display:flex; justify-content:space-between; align-items:center;}
+.log-item{margin-bottom:12px; border-bottom:1px dashed rgba(234,246,255,0.1); padding-bottom:6px;}
+.log-status{display:inline-block; padding:2px 7px; font-size:0.78rem; font-weight:bold; margin-bottom:5px; letter-spacing:1px; color:#04121f;}
+.status-event{background:var(--gold);} .status-confirmed{background:var(--confirmed);} .status-rumored{background:var(--danger); color:#fff;} .status-blueprint{background:var(--outer); color:#04121f;}
+.log-title-text{font-size:0.95rem; color:var(--ink);}
+.log-date{display:block; font-size:0.82rem; color:var(--dim); margin-top:2px;}
+
+.watch-item{margin-bottom:12px; border-left:4px solid var(--confirmed); padding-left:10px; cursor:pointer;}
+.watch-item.jcc{border-left-color:var(--danger);}
+.watch-item strong{display:block; color:var(--ink); font-size:1rem; margin-bottom:3px;}
+.watch-item p{margin:0; color:var(--dim); font-size:0.85rem; line-height:1.3;}
+
+#add-mini{margin-top:6px; border-top:2px dashed rgba(127,224,240,0.3); padding-top:10px;}
+#add-mini input{width:100%; background:var(--navy); border:2px solid var(--outer-dark); color:var(--ink); padding:6px 8px; font-family:var(--font); font-size:0.92rem; margin-bottom:6px;}
+#add-mini input:focus{outline:none; border-color:var(--cyan);}
+.coord-row{display:flex; gap:6px;} .coord-row input{margin-bottom:0;}
+#pick-btn, #add-btn{width:100%; margin-top:4px; padding:6px; border:2px solid var(--outer-dark); background:var(--navy); color:var(--dim); font-family:var(--font); font-size:0.92rem; letter-spacing:1px; cursor:pointer;}
+#pick-btn.active{border-color:var(--gold); color:var(--gold);}
+#add-btn{border-color:var(--confirmed); color:var(--confirmed);}
+
+/* layers list */
+.layer-row{display:flex; align-items:center; gap:8px; padding:6px 0; border-bottom:1px dashed rgba(234,246,255,0.08); cursor:pointer;}
+.layer-row.active{background:rgba(255,213,79,0.08);}
+.layer-swatch{width:16px; height:16px; border:2px solid #04121f; flex-shrink:0;}
+.layer-name{flex:1; font-size:0.95rem; color:var(--ink); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+.layer-mini-btn{background:none; border:none; color:var(--dim); font-size:0.85rem; cursor:pointer; padding:2px 4px;}
+.layer-mini-btn:hover{color:var(--cyan);}
+#new-layer-btn{width:100%; margin-top:8px; padding:6px; border:2px dashed var(--outer-dark); background:none; color:var(--dim); font-family:var(--font); font-size:0.95rem; cursor:pointer;}
+#new-layer-btn:hover{border-color:var(--cyan); color:var(--cyan);}
+
+/* bottom ticker */
+#ticker-bar{position:absolute; bottom:14px; left:14px; right:14px; z-index:150; height:44px; background:var(--navy); border:3px solid var(--outer); display:flex; align-items:center; gap:12px; padding:0 12px;}
+#ticker-track{flex:1; overflow:hidden; white-space:nowrap; position:relative; height:100%; display:flex; align-items:center;}
+#ticker-text{display:inline-block; padding-left:100%; animation:scroll-left 22s linear infinite; font-size:1.1rem; letter-spacing:2px; color:var(--cyan);}
+@keyframes scroll-left{ from{transform:translateX(0);} to{transform:translateX(-100%);} }
+#mute-btn{width:36px; height:36px; border:2px solid var(--outer-dark); background:var(--navy-deep); color:var(--ink); cursor:pointer; flex-shrink:0; font-size:1.1rem;}
+
+#toggle-btn{position:absolute; bottom:66px; left:14px; z-index:150; background:var(--gold); color:#1a1200; border:3px solid #a9791a; padding:8px 16px; font-family:var(--font); font-size:1.02rem; letter-spacing:1px; cursor:pointer; box-shadow:2px 2px 0 rgba(0,0,0,0.4);}
+#save-btn{position:absolute; bottom:66px; left:170px; z-index:150; background:var(--confirmed); color:#04121f; border:3px solid #2a8fa8; padding:8px 16px; font-family:var(--font); font-size:1.02rem; letter-spacing:1px; cursor:pointer; box-shadow:2px 2px 0 rgba(0,0,0,0.4);}
+#save-status{position:absolute; bottom:66px; left:330px; z-index:150; font-size:0.95rem; color:var(--dim); align-self:center; line-height:44px;}
+
+#web-compass{position:absolute; bottom:66px; right:14px; z-index:150; width:78px; height:78px; opacity:0.9;}
+
+body.hidden-panels .panel, body.hidden-panels #save-btn{display:none !important;}
+
+@media (max-width:900px){
+  #activity-log, #layers-panel, #committee-watch{width:70vw;}
+  #layers-panel{top:auto;}
+  #search-wrap{width:220px;}
+  #save-btn{left:auto; right:14px; bottom:118px;}
+  #save-status{display:none;}
+}
+</style>
+</head>
+<body>
+
+<div id="frame">
+  <div id="boot-screen">
+    <div class="icon-sq" style="position:absolute; top:14px; left:14px; border-radius:50%; border-color:var(--gold);">
+      <svg width="18" height="18" viewBox="0 0 8 8"><rect x="1" y="1" width="6" height="6" fill="none" stroke="#ffd54f" stroke-width="1"/><rect x="3" y="3" width="2" height="2" fill="#ffd54f"/></svg>
+    </div>
+    <div class="icon-sq" style="position:absolute; top:14px; right:14px;">
+      <svg width="20" height="20" viewBox="0 0 10 10"><path d="M5 0v10M0 5h10M1.5 1.5l7 7M8.5 1.5l-7 7" stroke="#7fe0f0" stroke-width="1" fill="none"/></svg>
+    </div>
+    <div id="terminal-content"></div>
+    <div class="cursor"></div>
+    <div id="boot-rig">
+      <div id="boot-badge"><svg width="24" height="24" viewBox="0 0 10 10"><path d="M5 0v10M0 5h10M1.5 1.5l7 7M8.5 1.5l-7 7" stroke="#ffd54f" stroke-width="1" fill="none"/></svg></div>
+      <div id="boot-thread"></div>
+    </div>
+    <div id="boot-loadbar-wrap">
+      <div class="icon-sq" style="border-radius:50%; border-color:var(--gold);"><svg width="16" height="16" viewBox="0 0 8 8"><rect x="1" y="1" width="6" height="6" fill="none" stroke="#ffd54f" stroke-width="1"/></svg></div>
+      <div id="boot-loadbar"><div id="boot-loadbar-fill"></div><div id="boot-loadbar-label">YÜKLENİYOR</div></div>
+      <div class="icon-sq"><svg width="16" height="16" viewBox="0 0 10 10"><path d="M1 4h2l2-2v6l-2-2H1z" fill="#7fe0f0"/></svg></div>
+    </div>
+  </div>
+
+  <div id="ui-layer">
+    <div id="map-container"><div id="map"></div></div>
+
+    <div id="header-pill"><div class="dot"></div><span>RAYFELMUN TRACKER</span><div class="dot"></div></div>
+    <div id="search-wrap"><input id="search-input" type="text" placeholder="KONUM ARA..."></div>
+
+    <div id="badge-tl" class="corner-badge" title="Konferans Merkezi"><svg width="22" height="22" viewBox="0 0 8 8"><rect x="1" y="1" width="6" height="6" fill="none" stroke="#ffd54f" stroke-width="1"/><rect x="3" y="3" width="2" height="2" fill="#ffd54f"/></svg></div>
+    <div id="badge-tr" class="corner-badge" title="Ağ Durumu"><svg width="24" height="24" viewBox="0 0 10 10"><path d="M5 0v10M0 5h10M1.5 1.5l7 7M8.5 1.5l-7 7" stroke="#7fe0f0" stroke-width="1" fill="none"/></svg></div>
+
+    <div id="activity-log" class="panel">
+      <div class="panel-title">AKTİVİTE GÜNLÜĞÜ</div>
+      <div id="log-content"></div>
+    </div>
+
+    <div id="layers-panel" class="panel">
+      <div class="panel-title">KATMANLAR</div>
+      <div id="layers-content"></div>
+      <button id="new-layer-btn" type="button">+ YENİ KATMAN</button>
+    </div>
+
+    <div id="committee-watch" class="panel">
+      <div class="panel-title">KOMİTE TAKİBİ</div>
+      <div id="watch-content">
+        <div class="watch-item" data-match="DISEC"><strong>DISEC</strong><p>Silahsızlanma ve uluslararası güvenlik gündem maddeleri oturuma açıldı.</p></div>
+        <div class="watch-item" data-match="SOCHUM"><strong>SOCHUM</strong><p>Sosyal, insani ve kültürel konular komitesinde draft resolution çalışmaları sürüyor.</p></div>
+        <div class="watch-item" data-match="LEGAL"><strong>LEGAL</strong><p>Uluslararası hukuk maddeleri üzerindeki müzakereler devam ediyor.</p></div>
+        <div class="watch-item jcc" data-match="JCC NATO"><strong>JCC NATO vs WARSAW</strong><p>Kriz odalarında sıcak temas: NATO ve Varşova Paktı karargahları alarm durumunda.</p></div>
+        <div class="watch-item" data-match="WHO"><strong>UNODC &amp; WHO</strong><p>Uyuşturucu, suç önleme ve küresel sağlık politikaları inceleme altında.</p></div>
+      </div>
+      <div id="add-mini">
+        <input type="text" id="in-name" placeholder="YENİ KOMİTE / KONUM ADI">
+        <button id="pick-btn" type="button">📍 HARİTADAN SEÇ</button>
+        <div class="coord-row"><input type="text" id="in-lat" placeholder="ENLEM"><input type="text" id="in-lng" placeholder="BOYLAM"></div>
+        <button id="add-btn" type="button">+ KONUMU EKLE</button>
+      </div>
+    </div>
+
+    <div id="toggle-btn">PANELLERİ GİZLE</div>
+    <div id="save-btn">💾 KAYDET</div>
+    <div id="save-status"></div>
+    <svg id="web-compass" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="46" fill="none" stroke="#4fb8e8" stroke-width="2" opacity="0.5"/>
+      <circle cx="50" cy="50" r="30" fill="none" stroke="#4fb8e8" stroke-width="1.5" opacity="0.5"/>
+      <circle cx="50" cy="50" r="14" fill="none" stroke="#4fb8e8" stroke-width="1.5" opacity="0.6"/>
+      <line x1="50" y1="4" x2="50" y2="96" stroke="#4fb8e8" stroke-width="1" opacity="0.4"/>
+      <line x1="4" y1="50" x2="96" y2="50" stroke="#4fb8e8" stroke-width="1" opacity="0.4"/>
+      <line x1="17" y1="17" x2="83" y2="83" stroke="#4fb8e8" stroke-width="1" opacity="0.35"/>
+      <line x1="83" y1="17" x2="17" y2="83" stroke="#4fb8e8" stroke-width="1" opacity="0.35"/>
+      <circle cx="50" cy="50" r="4" fill="#ffd54f"/>
+    </svg>
+
+    <div id="ticker-bar">
+      <div id="ticker-track"><span id="ticker-text">RAYFELMUN KOMİTE DURUM GÜNCELLEMESİ &nbsp;•&nbsp; TÜM ODALAR ÇEVRİMİÇİ &nbsp;•&nbsp; KROKİ REFERANS NOKTALARI EKLENDİ &nbsp;•&nbsp;</span></div>
+      <button id="mute-btn" type="button">🔊</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ====================== STATE ====================== */
+const DEFAULT_POINTS = [
+  { id:'p1', title:"Açılış ve Kapanış Salonu", status:"ANA ETKİNLİK", type:"event", date:"OKUL ANA SALONU", lat:41.39577228836842, lng:27.374002669840344 },
+  { id:'p2', title:"DISEC Komite Odası", status:"ONAYLANDI", type:"confirmed", date:"AKTİF OTURUM", lat:41.39640238550622, lng:27.374579604700116 },
+  { id:'p3', title:"SOCHUM Komite Odası", status:"ONAYLANDI", type:"confirmed", date:"AKTİF OTURUM", lat:41.396478340953564, lng:27.374722432327335 },
+  { id:'p4', title:"LEGAL Komite Odası", status:"ONAYLANDI", type:"confirmed", date:"AKTİF OTURUM", lat:41.3961428561237, lng:27.37435466301562 },
+  { id:'p5', title:"JCC NATO Karargahı", status:"KRİZ BÖLGESİ", type:"rumored", date:"YÜKSEK ALARM", lat:41.39611157922698, lng:27.37479177113212 },
+  { id:'p6', title:"JCC Varşova Paktı Karargahı", status:"KRİZ BÖLGESİ", type:"rumored", date:"YÜKSEK ALARM", lat:41.396209749032735, lng:27.374879963410883 },
+  { id:'p7', title:"WHO Komite Odası", status:"ONAYLANDI", type:"confirmed", date:"AKTİF OTURUM", lat:41.39603307116326, lng:27.37507305034631 },
+  { id:'p8', title:"UNODC Komite Odası", status:"ONAYLANDI", type:"confirmed", date:"AKTİF OTURUM", lat:41.3960474278225, lng:27.375232535445374 }
+];
+
+const BLUEPRINT_POINTS = [
+  { id:'ref1', title:"Kroki - Sol Alt Daire", status:"ŞEMA NOKTASI", type:"blueprint", date:"SABİT REFERANS", lat:41.39567222, lng:27.37400833 },
+  { id:'ref2', title:"Kroki - Sağ Üst Daire", status:"ŞEMA NOKTASI", type:"blueprint", date:"SABİT REFERANS", lat:41.39634444, lng:27.37438333 },
+  { id:'ref3', title:"Kroki - Diğer Alt Daire", status:"ŞEMA NOKTASI", type:"blueprint", date:"SABİT REFERANS", lat:41.39597222, lng:27.37432778 }
+];
+
+let points = [];
+let layers = [];          
+let activeLayerId = null;
+let map;
+let pointMarkers = [];
+let overlaysByLayer = {}; 
+let pickMode = false, pickMarker = null;
+
+const POINTS_KEY = 'rayfelmun-tracker-points';
+const LAYERS_KEY = 'rayfelmun-lysa-layers';
+
+const pixelMapStyle = [
+  { elementType: "geometry", stylers: [{ color: "#0c2138" }] },
+  { elementType: "labels.text.fill", stylers: [{ color: "#7fe0f0" }] },
+  { elementType: "labels.text.stroke", stylers: [{ color: "#071626" }] },
+  { featureType: "administrative", elementType: "geometry", stylers: [{ visibility: "off" }] },
+  { featureType: "poi", stylers: [{ visibility: "off" }] },
+  { featureType: "road", elementType: "geometry", stylers: [{ color: "#123151" }] },
+  { featureType: "road", elementType: "labels.text.fill", stylers: [{ color: "#7fe0f0" }] },
+  { featureType: "water", elementType: "geometry", stylers: [{ color: "#061020" }] }
+];
+
+/* ====================== BOOT SEQUENCE ====================== */
+const bootMessages = [
+  "RAYFELMUN TRACKER v2.0 BAŞLATILIYOR...",
+  "OKUL YERLEŞKESİ GPS AĞI YÜKLENİYOR...",
+  "KROKİ REFERANS KOORDİNATLARI ENTEGRE EDİLİYOR [TAMAM]",
+  "GOOGLE HARİTA MOTORU BAĞLANIYOR...",
+  "ÇİZİM ARAÇLARI DEVRE DIŞI BIRAKILDI...",
+  "BOOT SELF-TEST ÇALIŞTIRILIYOR: BAŞARILI",
+  "RAYFELMUN OPERASYONEL TAKİPÇİSİNE HOŞ GELDİNİZ."
+];
+(function boot(){
+  const terminal = document.getElementById('terminal-content');
+  const bootScreen = document.getElementById('boot-screen');
+  const fillBar = document.getElementById('boot-loadbar-fill');
+  let delay = 0;
+  bootMessages.forEach((msg, i) => {
+    setTimeout(() => {
+      const p = document.createElement('div');
+      p.className = 'boot-line'; p.textContent = msg;
+      terminal.appendChild(p);
+      fillBar.style.width = Math.round(((i+1)/bootMessages.length)*100) + '%';
+      if(i === bootMessages.length - 1){
+        setTimeout(() => {
+          bootScreen.style.transition = 'opacity 0.5s ease';
+          bootScreen.style.opacity = '0';
+          setTimeout(() => { bootScreen.style.display = 'none'; uiLayer.style.display = 'block'; }, 500);
+        }, 700);
+      }
+    }, delay);
+    delay += 260 + Math.random()*260;
+  });
+})();
+
+/* ====================== GOOGLE MAPS INIT ====================== */
+function initMap(){
+  map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 18,
+    center: { lat: 41.3962, lng: 27.3747 },
+    styles: pixelMapStyle,
+    disableDefaultUI: true,
+    zoomControl: true,
+    gestureHandling: 'greedy'
+  });
+
+  // click-to-place point (existing add-committee flow)
+  map.addListener('click', (e) => {
+    if(!pickMode) return;
+    document.getElementById('in-lat').value = e.latLng.lat().toFixed(6);
+    document.getElementById('in-lng').value = e.latLng.lng().toFixed(6);
+    if(pickMarker) pickMarker.setMap(null);
+    pickMarker = new google.maps.Marker({ position: e.latLng, map, icon: { path: google.maps.SymbolPath.CIRCLE, scale:6, fillColor:'#ffd54f', fillOpacity:0.9, strokeWeight:0 } });
+  });
+
+  // places autocomplete search
+  const searchInput = document.getElementById('search-input');
+  const autocomplete = new google.maps.places.Autocomplete(searchInput);
+  autocomplete.bindTo('bounds', map);
+  autocomplete.addListener('place_changed', () => {
+    const place = autocomplete.getPlace();
+    if(place.geometry && place.geometry.location){
+      map.panTo(place.geometry.location);
+      map.setZoom(18);
+    }
+  });
+
+  loadPoints();
+  loadLayers();
+}
+
+/* ====================== ICONS ====================== */
+function starIconUrl(color){
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 8 8"><path d="M4 0l1 3h3L5.5 5l1 3L4 6 1.5 8l1-3L0 3h3z" fill="${color}" stroke="#04121f" stroke-width="0.3"/></svg>`;
+  return 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg);
+}
+function typeColor(type){ return type === 'event' ? '#ffd54f' : type === 'rumored' ? '#ff5577' : type === 'blueprint' ? '#4fb8e8' : '#6be3ff'; }
+
+/* ====================== COMMITTEE POINTS ====================== */
+function escapeHtml(s){ return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+
+function renderLog(){
+  const c = document.getElementById('log-content'); c.innerHTML = '';
+  points.forEach(pt => {
+    const div = document.createElement('div');
+    div.className = 'log-item';
+    div.innerHTML = `<span class="log-status status-${pt.type}">${pt.status}</span><div class="log-title-text">${escapeHtml(pt.title)}</div><span class="log-date">${escapeHtml(pt.date)}</span>`;
+    div.addEventListener('click', () => { map.panTo({lat:pt.lat,lng:pt.lng}); map.setZoom(19); });
+    c.appendChild(div);
+  });
+}
+
+function renderPointMarkers(){
+  pointMarkers.forEach(m => m.setMap(null));
+  pointMarkers = points.map(pt => {
+    let iconUrl, size = 26, anchor = 13;
+    
+    // Krokideki referans düğümleri için özel "noktalı daire" SVG ikonu
+    if(pt.type === 'blueprint'){
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="#4fb8e8" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="#4fb8e8"/></svg>`;
+      iconUrl = 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg);
+      size = 24; anchor = 12;
+    } else {
+      iconUrl = starIconUrl(typeColor(pt.type));
+    }
+
+    const marker = new google.maps.Marker({
+      position: { lat: pt.lat, lng: pt.lng }, map,
+      icon: { url: iconUrl, scaledSize: new google.maps.Size(size,size), anchor: new google.maps.Point(anchor,anchor) },
+      title: pt.title
+    });
+    const iw = new google.maps.InfoWindow({ content: `<div style="font-family:'VT323',monospace;color:#eaf6ff;background:#0c2138;padding:4px;"><b style="color:#7fe0f0;">${escapeHtml(pt.title)}</b><br>${escapeHtml(pt.status)}</div>` });
+    marker.addListener('click', () => iw.open(map, marker));
+    return marker;
+  });
+}
+async function persistPoints(){ try{ await window.storage.set(POINTS_KEY, JSON.stringify(points), false); }catch(e){ console.error(e); } }
+async function loadPoints(){
+  try{ const res = await window.storage.get(POINTS_KEY, false); points = res ? JSON.parse(res.value) : DEFAULT_POINTS.slice(); }
+  catch(e){ points = DEFAULT_POINTS.slice(); }
+  
+  // Kroki referans noktalarının (mavi dairelerin) her zaman yüklendiğinden emin oluyoruz
+  BLUEPRINT_POINTS.forEach(bp => {
+    if(!points.find(p => p.id === bp.id)) points.push(bp);
+  });
+
+  renderLog(); renderPointMarkers();
+}
+
+document.querySelectorAll('.watch-item').forEach(item => {
+  item.addEventListener('click', () => {
+    const key = item.dataset.match;
+    const match = points.find(p => p.title.toUpperCase().includes(key));
+    if(match){ map.panTo({lat:match.lat,lng:match.lng}); map.setZoom(19); }
+  });
+});
+
+const pickBtn = document.getElementById('pick-btn');
+pickBtn.addEventListener('click', () => {
+  pickMode = !pickMode;
+  pickBtn.classList.toggle('active', pickMode);
+  pickBtn.textContent = pickMode ? '🎯 HARİTADA NOKTA SEÇ...' : '📍 HARİTADAN SEÇ';
+});
+document.getElementById('add-btn').addEventListener('click', () => {
+  const name = document.getElementById('in-name').value.trim();
+  const lat = parseFloat(document.getElementById('in-lat').value);
+  const lng = parseFloat(document.getElementById('in-lng').value);
+  if(!name || isNaN(lat) || isNaN(lng)) return;
+  points.push({ id:'p'+Date.now(), title:name, status:'EKLENDİ', type:'confirmed', date:'MANUEL KAYIT', lat, lng });
+  renderLog(); renderPointMarkers(); persistPoints();
+  map.panTo({lat,lng}); map.setZoom(19);
+  document.getElementById('in-name').value = ''; document.getElementById('in-lat').value = ''; document.getElementById('in-lng').value = '';
+  if(pickMarker){ pickMarker.setMap(null); pickMarker = null; }
+  pickMode = false; pickBtn.classList.remove('active'); pickBtn.textContent = '📍 HARİTADAN SEÇ';
+});
+
+/* ====================== DRAWING LAYERS ====================== */
+function getActiveLayer(){ return layers.find(l => l.id === activeLayerId) || null; }
+
+function newLayer(name, color){
+  return { id:'l'+Date.now()+Math.floor(Math.random()*1000), name: name || ('Katman ' + (layers.length+1)), color: color || randomColor(), visible:true, shapes:[] };
+}
+function randomColor(){
+  const palette = ['#ffd54f','#6be3ff','#ff5577','#a3ff7f','#c792ff','#ff9d5c'];
+  return palette[Math.floor(Math.random()*palette.length)];
+}
+
+function renderLayersPanel(){
+  const c = document.getElementById('layers-content'); c.innerHTML = '';
+  layers.forEach(layer => {
+    const row = document.createElement('div');
+    row.className = 'layer-row' + (layer.id === activeLayerId ? ' active' : '');
+    row.innerHTML = `
+      <input type="checkbox" ${layer.visible ? 'checked' : ''} class="layer-visible-cb">
+      <span class="layer-swatch" style="background:${layer.color};"></span>
+      <span class="layer-name">${escapeHtml(layer.name)}</span>
+      <button class="layer-mini-btn" data-act="rename">✎</button>
+      <button class="layer-mini-btn" data-act="del">✕</button>
+    `;
+    row.querySelector('.layer-visible-cb').addEventListener('click', (ev) => {
+      ev.stopPropagation(); layer.visible = ev.target.checked; saveLayers(); renderAllLayers();
+    });
+    row.querySelector('[data-act="rename"]').addEventListener('click', (ev) => {
+      ev.stopPropagation();
+      const nn = prompt('Katman adı:', layer.name);
+      if(nn){ layer.name = nn; saveLayers(); renderLayersPanel(); }
+    });
+    row.querySelector('[data-act="del"]').addEventListener('click', (ev) => {
+      ev.stopPropagation();
+      if(!confirm('"' + layer.name + '" katmanı ve içindeki tüm çizimler silinsin mi?')) return;
+      layers = layers.filter(l => l.id !== layer.id);
+      if(activeLayerId === layer.id) activeLayerId = layers.length ? layers[0].id : null;
+      saveLayers(); renderLayersPanel(); renderAllLayers();
+    });
+    row.addEventListener('click', () => {
+      activeLayerId = layer.id;
+      renderLayersPanel();
+    });
+    c.appendChild(row);
+  });
+}
+
+document.getElementById('new-layer-btn').addEventListener('click', () => {
+  const l = newLayer();
+  layers.push(l);
+  activeLayerId = l.id;
+  saveLayers(); renderLayersPanel(); renderAllLayers();
+});
+
+function clearOverlaysForLayer(layerId){
+  (overlaysByLayer[layerId] || []).forEach(o => o.setMap(null));
+  overlaysByLayer[layerId] = [];
+}
+
+function renderAllLayers(){
+  layers.forEach(layer => {
+    clearOverlaysForLayer(layer.id);
+    if(!layer.visible) return;
+    overlaysByLayer[layer.id] = [];
+    layer.shapes.forEach((shape) => {
+      let overlay = null;
+      if(shape.type === 'marker'){
+        overlay = new google.maps.Marker({
+          position: { lat: shape.lat, lng: shape.lng }, map,
+          icon: { path: google.maps.SymbolPath.CIRCLE, scale:7, fillColor: layer.color, fillOpacity:1, strokeColor:'#04121f', strokeWeight:1 }
+        });
+      } else if(shape.type === 'line' || shape.type === 'freehand'){
+        overlay = new google.maps.Polyline({ path: shape.path, map, strokeColor: layer.color, strokeWeight: 3 });
+      } else if(shape.type === 'polygon'){
+        overlay = new google.maps.Polygon({ paths: shape.path, map, strokeColor: layer.color, strokeWeight: 2, fillColor: layer.color, fillOpacity: 0.25 });
+      }
+      if(overlay){
+        overlaysByLayer[layer.id].push(overlay);
+      }
+    });
+  });
+}
+
+async function saveLayers(){
+  try{
+    await window.storage.set(LAYERS_KEY, JSON.stringify({ layers, activeLayerId }), false);
+    flashSaveStatus('KAYDEDİLDİ ✓');
+  }catch(e){ console.error(e); flashSaveStatus('KAYIT HATASI'); }
+}
+async function loadLayers(){
+  try{
+    const res = await window.storage.get(LAYERS_KEY, false);
+    if(res){ const data = JSON.parse(res.value); layers = data.layers || []; activeLayerId = data.activeLayerId || null; }
+  }catch(e){ layers = []; }
+  if(!layers.length){ const l = newLayer('Lysa Şeması', '#ffd54f'); layers.push(l); activeLayerId = l.id; }
+  if(!getActiveLayer() && layers.length) activeLayerId = layers[0].id;
+  renderLayersPanel(); renderAllLayers();
+}
+let saveStatusTimer = null;
+function flashSaveStatus(msg){
+  const el = document.getElementById('save-status');
+  el.textContent = msg;
+  clearTimeout(saveStatusTimer);
+  saveStatusTimer = setTimeout(() => { el.textContent = ''; }, 1800);
+}
+document.getElementById('save-btn').addEventListener('click', saveLayers);
+
+/* ====================== MISC UI ====================== */
+document.getElementById('toggle-btn').addEventListener('click', function(){
+  const hidden = document.body.classList.toggle('hidden-panels');
+  this.textContent = hidden ? 'PANELLERİ GÖSTER' : 'PANELLERİ GİZLE';
+});
+let muted = false;
+document.getElementById('mute-btn').addEventListener('click', function(){
+  muted = !muted;
+  this.textContent = muted ? '🔇' : '🔊';
+  document.getElementById('ticker-text').style.animationPlayState = muted ? 'paused' : 'running';
+});
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOVYRIgupAurZup5y1PRh8Ismb1A3lLao&libraries=places&callback=initMap" async defer></script>
+</body>
+</html>

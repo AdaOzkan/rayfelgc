@@ -1,0 +1,303 @@
+    @font-face {
+            font-family: 'Northwell';
+            src: url('Northwell.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        /* Temel Ayarlar */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #142948;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- NAVIGASYON --- */
+        nav {
+            background: linear-gradient(to bottom, #142948 0%, rgb(21,21,30) 100%);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 5%;
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            z-index: 1001;
+        }
+
+        .logo-area img {
+            height: 50px;
+            filter: brightness(1.2);
+            width: auto;
+        }
+
+        .logo-area span {
+            font-family: 'Northwell', cursive;
+            font-size: 34px;
+            color: #ffffff;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 18px;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            opacity: 0.7;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active { 
+            opacity: 1; 
+            color: #27f4d2;
+        }
+
+        .apply-btn {
+            background-color: #111111;
+            color: white;
+            padding: 10px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border: 1px solid rgba(255,255,255,0.15);
+            transition: 0.3s;
+        }
+
+        .apply-btn:hover {
+            background-color: #ffffff;
+            color: #000;
+        }
+
+        .menu-toggle {
+            display: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        /* --- ABOUT CONTENT --- */
+        .about-header {
+            padding: 100px 10% 60px 10%;
+            text-align: center;
+            background: linear-gradient(to bottom, #f8f9fa, #ffffff);
+        }
+
+        .about-label {
+            font-family: 'Northwell', cursive;
+            font-size: 80px;
+            color: #142948;
+            display: block;
+            margin-bottom: -10px;
+            opacity: 0.9;
+        }
+
+        .about-title {
+            font-family: 'Antonio', sans-serif;
+            text-transform: uppercase;
+            font-size: clamp(32px, 5vw, 55px);
+            font-weight: 700;
+            color: #142948;
+            letter-spacing: -1px;
+            line-height: 1.1;
+        }
+
+        .about-description {
+            max-width: 700px;
+            margin: 30px auto 0 auto;
+            font-size: 19px;
+            color: #4a5568;
+            font-weight: 300;
+        }
+
+        /* --- STORY SECTION --- */
+        .story-section {
+            padding: 80px 5%;
+        }
+
+        .story-container {
+            background-color: #142948;
+            color: #ffffff;
+            padding: 80px;
+            border-radius: 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 60px;
+            align-items: center;
+            box-shadow: 0 30px 60px rgba(20, 41, 72, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-container::before {
+            content: "RAY";
+            position: absolute;
+            bottom: -50px;
+            right: -20px;
+            font-family: 'Antonio', sans-serif;
+            font-size: 200px;
+            font-weight: 800;
+            color: rgba(255,255,255,0.03);
+            pointer-events: none;
+        }
+
+        .story-image {
+            width: 100%;
+            height: 400px;
+            background: url('rayfelmunLogo.jpg') center/cover;
+            border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .story-content h2 {
+            font-family: 'Antonio', sans-serif;
+            font-size: 42px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            color: #27f4d2;
+        }
+
+        .story-content p {
+            font-size: 18px;
+            line-height: 1.8;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: rgb(21,21,30);
+            padding: 80px 8% 40px 8%;
+            display: grid;
+            grid-template-columns: 1.8fr 1fr 1fr 1fr;
+            gap: 40px;
+            color: white;
+            margin-top: 60px;
+            align-items: start;
+        }
+
+        .footer-brand img { 
+            width: 250px; 
+            height: auto; 
+            margin-bottom: 25px; 
+            display: block;
+        }
+
+        .footer-brand h2 { font-family: 'Antonio', sans-serif; font-size: 36px; text-transform: uppercase; }
+        .footer-brand h2 span { color: #27f4d2; }
+        .footer-brand p { opacity: 0.6; font-style: italic; margin-top: 10px; font-size: 15px; }
+
+        .footer-col h4 { font-size: 12px; letter-spacing: 2px; margin-bottom: 25px; color: #27f4d2; text-transform: uppercase; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 12px; }
+        .footer-col ul li a { 
+            color: white; 
+            text-decoration: none; 
+            opacity: 0.6; 
+            transition: 0.3s; 
+            font-size: 13px; 
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        .footer-col ul li a:hover { opacity: 1; color: #27f4d2; padding-left: 5px; }
+
+        .social-icons { display: flex; gap: 20px; }
+        .social-icons a { color: white; text-decoration: none; }
+        .social-icons i { font-size: 22px; opacity: 0.7; transition: 0.3s; cursor: pointer; }
+        .social-icons i:hover { opacity: 1; color: #27f4d2; transform: translateY(-3px); }
+
+        .bottom-bar {
+            background-color: rgb(21,21,30);
+            padding: 30px 8%;
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            font-size: 12px;
+            color: rgba(255,255,255,0.5);
+        }
+
+        /* --- MOBIL UYUMLULUK --- */
+        @media (max-width: 968px) {
+            .story-container {
+                grid-template-columns: 1fr;
+                padding: 40px;
+                text-align: center;
+                border-radius: 30px;
+            }
+            .story-image { height: 300px; }
+            footer { grid-template-columns: 1.5fr 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle { display: block; }
+
+            .nav-right {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                height: 100vh;
+                background: rgb(21,21,30);
+                flex-direction: column;
+                justify-content: center;
+                gap: 40px;
+                transition: 0.4s;
+                z-index: 1000;
+                box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+            }
+
+            .nav-right.active { right: 0; }
+
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 25px;
+            }
+
+            .nav-links a { font-size: 16px; }
+
+            .about-header { padding: 80px 5% 40px 5%; }
+            .about-label { font-size: 60px; }
+            .about-description { font-size: 16px; }
+
+            footer { grid-template-columns: 1fr; text-align: center; }
+            .footer-brand img { margin: 0 auto 20px auto; width: 200px; }
+            .social-icons { justify-content: center; }
+            .bottom-bar { flex-direction: column; gap: 15px; text-align: center; }
+        }

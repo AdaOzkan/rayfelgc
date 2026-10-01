@@ -1,0 +1,1326 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery | Rayfelmun '27</title>
+    <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @font-face {
+            font-family: 'Northwell';
+            src: url('Northwell.ttf') format('truetype');
+            font-display: swap;
+        }
+        :root {
+            --teal: #27f4d2;
+            --purple: #8a2be2;
+            --dark: rgb(21,21,30);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+        html, body { height: 100%; }
+        body {
+            font-family: 'Outfit', sans-serif;
+            color: #fff;
+            background-color: var(--dark);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .bg-gradient {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: linear-gradient(-45deg, rgb(21,21,30), #142948, #0f172a, #1a0b2e);
+            background-size: 400% 400%;
+            animation: gradientMove 15s ease infinite;
+            z-index: -1;
+        }
+        @keyframes gradientMove {
+            0%   { background-position: 0% 50%; }
+            50%  { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .scroll-container {
+            flex: 1;
+            min-height: 0;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+        }
+        .scroll-container::-webkit-scrollbar { display: none; }
+        .scroll-container { -ms-overflow-style: none; scrollbar-width: none; }
+
+        section {
+            height: 100%;
+            min-height: 100%;
+            width: 100vw;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* INTRO */
+        .intro-screen { text-align: center; }
+        .intro-screen h1 {
+            font-family: 'Northwell', cursive;
+            font-size: clamp(70px, 15vw, 160px);
+            background: linear-gradient(to right, var(--teal), #ffffff, #ff7eb3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: normal;
+            line-height: 2;
+            animation: textShine 5s linear infinite;
+            background-size: 200% auto;
+            margin-bottom: 5px;
+        }
+        @keyframes textShine { to { background-position: 200% center; } }
+        .intro-screen p {
+            font-size: 18px;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 50px;
+            font-weight: 300;
+        }
+        .start-journey-btn {
+            background: linear-gradient(45deg, rgba(39,244,210,0.1), rgba(138,43,226,0.1));
+            color: #fff;
+            border: 1px solid var(--teal);
+            padding: 18px 45px;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            border-radius: 50px;
+            transition: all 0.5s cubic-bezier(0.16,1,0.3,1);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(39,244,210,0.2);
+        }
+        .start-journey-btn:hover {
+            background: linear-gradient(45deg, var(--teal), var(--purple));
+            border-color: transparent;
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(39,244,210,0.4);
+            color: var(--dark);
+        }
+
+        /* DAY LAYOUT */
+        .day-layout {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .day-left {
+            width: clamp(140px, 16vw, 220px);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+            transform: translateX(28%);
+        }
+        .day-outline-text {
+            font-family: 'Antonio', sans-serif;
+            font-size: clamp(72px, 9vw, 130px);
+            font-weight: 700;
+            color: transparent;
+            -webkit-text-stroke: 2px rgba(39,244,210,0.35);
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            letter-spacing: 10px;
+            user-select: none;
+            line-height: 1;
+            white-space: nowrap;
+        }
+        .day-outline-text span {
+            display: block;
+            font-size: clamp(36px, 4vw, 60px);
+            -webkit-text-stroke: 1.5px rgba(39,244,210,0.25);
+            letter-spacing: 6px;
+        }
+        .day-right {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 22px;
+            z-index: 1;
+        }
+        .day-title-small {
+            font-family: 'Antonio', sans-serif;
+            font-size: clamp(24px, 3.5vw, 46px);
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            background: linear-gradient(to right, #fff, var(--teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .next-day-btn {
+            background: linear-gradient(45deg, rgba(39,244,210,0.08), rgba(138,43,226,0.08));
+            color: #fff;
+            border: 1px solid rgba(39,244,210,0.5);
+            padding: 11px 30px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            border-radius: 50px;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(8px);
+        }
+        .next-day-btn:hover {
+            background: linear-gradient(45deg, var(--teal), var(--purple));
+            border-color: transparent;
+            color: var(--dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(39,244,210,0.3);
+        }
+
+        /* ── 3D KİTAP KAPAĞI ── */
+        .album-cover-wrap {
+            position: relative;
+            perspective: 1200px;
+        }
+        .album-cover {
+            width: clamp(160px, 20vw, 230px);
+            height: clamp(220px, 28vw, 320px);
+            position: relative;
+            transform-style: preserve-3d;
+            cursor: pointer;
+            transition: transform 0.6s cubic-bezier(0.2,0.8,0.2,1);
+            filter: drop-shadow(0 30px 50px rgba(0,0,0,0.6));
+        }
+        .album-cover:hover {
+            transform: rotateY(-18deg) rotateX(4deg) translateY(-10px);
+            filter: drop-shadow(0 40px 60px rgba(39,244,210,0.3));
+        }
+
+        /* Deri/bez kapak dokusu efekti */
+        .cover-front {
+            position: absolute;
+            inset: 0;
+            border-radius: 3px 14px 14px 3px;
+            overflow: hidden;
+            backface-visibility: hidden;
+            box-shadow:
+                inset 0 0 0 1px rgba(255,255,255,0.08),
+                inset -2px 0 8px rgba(0,0,0,0.4);
+            background: linear-gradient(135deg, #1a1a3a, #241f3d);
+            display: flex;
+        }
+        .cover-front img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            display: block;
+            position: relative;
+            z-index: 3; /* Fotoğrafın üstte kalmasını sağlar */
+        }
+        /* Cilt dokusu overlay - kanvas/defter dokusu */
+        .cover-front::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 3px,
+                    rgba(0,0,0,0.06) 3px,
+                    rgba(0,0,0,0.06) 4px
+                ),
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 3px,
+                    rgba(0,0,0,0.025) 3px,
+                    rgba(0,0,0,0.025) 4px
+                );
+            z-index: 1;
+            pointer-events: none;
+        }
+        .cover-front::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                130deg,
+                rgba(255,255,255,0.22) 0%,
+                rgba(255,255,255,0.06) 30%,
+                transparent 55%,
+                rgba(0,0,0,0.2) 85%,
+                rgba(0,0,0,0.35) 100%
+            );
+            z-index: 2;
+            border-radius: inherit;
+            pointer-events: none;
+        }
+
+        /* Sırt (spine) - gerçekçi deri dokusu + dikiş */
+        .cover-spine {
+            position: absolute;
+            left: -18px;
+            top: 0;
+            width: 18px;
+            height: 100%;
+            background: linear-gradient(
+                to right,
+                #0d0d20 0%,
+                #1a1a3a 25%,
+                #252545 50%,
+                #1a1a3a 75%,
+                #0d0d20 100%
+            );
+            border-radius: 4px 0 0 4px;
+            transform: rotateY(90deg) translateZ(-9px);
+            backface-visibility: hidden;
+            box-shadow: inset -3px 0 8px rgba(0,0,0,0.6);
+        }
+        /* Sırt dikişleri */
+        .cover-spine::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 8%;
+            bottom: 8%;
+            width: 1px;
+            background: repeating-linear-gradient(to bottom,
+                transparent 0,
+                transparent 5px,
+                rgba(39,244,210,0.3) 5px,
+                rgba(39,244,210,0.3) 7px
+            );
+            transform: translateX(-50%);
+        }
+        /* Sırt altın şerit süsü */
+        .cover-spine::after {
+            content: '';
+            position: absolute;
+            left: 3px; right: 3px;
+            top: 15%; height: 1px;
+            background: rgba(39,244,210,0.2);
+            box-shadow: 0 0 0 0 transparent,
+                        0 200px 0 0 rgba(39,244,210,0.2);
+        }
+
+        .cover-back {
+            position: absolute;
+            inset: 0;
+            border-radius: 3px 14px 14px 3px;
+            background: linear-gradient(135deg, #141428, #0f172a);
+            transform: rotateY(180deg);
+        }
+
+        /* Defter sayfaları kenarı (sağ taraf) */
+        .cover-pages-edge {
+            position: absolute;
+            right: -6px;
+            top: 3px;
+            bottom: 3px;
+            width: 6px;
+            background: repeating-linear-gradient(
+                to bottom,
+                #c8c8b8,
+                #c8c8b8 1px,
+                #e8e8d8 1px,
+                #e8e8d8 3px
+            );
+            border-radius: 0 2px 2px 0;
+            opacity: 0.7;
+        }
+
+        .open-hint {
+            margin-top: 14px;
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(39,244,210,0.6);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: opacity 0.3s;
+        }
+        .open-hint i { font-size: 14px; animation: hintPulse 2s ease-in-out infinite; }
+        @keyframes hintPulse { 0%,100% { opacity: 0.5; } 50% { opacity: 1; } }
+
+        /* ══════════════════════════════════
+           DEFTER OVERLAY
+        ══════════════════════════════════ */
+        .book-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(5, 5, 15, 0.92);
+            backdrop-filter: blur(24px);
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 32px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+        .book-overlay.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+        .book-overlay-close {
+            position: absolute;
+            top: 24px; right: 28px;
+            font-size: 22px;
+            color: rgba(255,255,255,0.45);
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            width: 42px; height: 42px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.25s;
+            z-index: 10;
+        }
+        .book-overlay-close:hover {
+            color: var(--teal);
+            border-color: var(--teal);
+            background: rgba(39,244,210,0.08);
+            transform: rotate(90deg);
+        }
+
+        /* Defter Sahnesi */
+        .book-scene {
+            perspective: 2400px;
+            position: relative;
+        }
+
+        /* Ana Defter */
+        .book {
+            width: clamp(580px, 72vw, 840px);
+            height: clamp(340px, 46vw, 520px);
+            position: relative;
+            transform-style: preserve-3d;
+            display: flex;
+            /* Hafif açık kitap eğimi */
+            transform: rotateX(4deg);
+            transition: transform 0.5s ease;
+        }
+
+        /* Dış Kapak Çerçevesi - spiral defter görünümü */
+        .book::before {
+            content: '';
+            position: absolute;
+            inset: -10px -10px -10px -10px;
+            background: linear-gradient(135deg, #1a1428, #0f0f22);
+            border-radius: 6px 18px 18px 6px;
+            z-index: -1;
+            box-shadow:
+                0 40px 80px rgba(0,0,0,0.8),
+                0 0 0 1px rgba(255,255,255,0.04),
+                inset 0 1px 0 rgba(255,255,255,0.06);
+        }
+
+        /* Cilt Şeridi - spiral defter halkaları */
+        .book-spine {
+            width: 26px;
+            flex-shrink: 0;
+            height: 100%;
+            background: linear-gradient(
+                to right,
+                #080812 0%,
+                #151530 30%,
+                #1e1e40 50%,
+                #151530 70%,
+                #080812 100%
+            );
+            position: relative;
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+            padding: 18px 0;
+        }
+        /* Spiral halkalar (notebook coil) */
+        .book-spine::before {
+            content: '';
+            position: absolute;
+            top: 6%;
+            bottom: 6%;
+            left: 50%;
+            width: 14px;
+            transform: translateX(-50%);
+            background-image: repeating-linear-gradient(
+                to bottom,
+                transparent 0px,
+                transparent 10px,
+                rgba(39,244,210,0.55) 10px,
+                rgba(39,244,210,0.55) 12px
+            );
+            border-radius: 7px;
+            box-shadow: inset 0 0 4px rgba(0,0,0,0.6);
+        }
+        .book-spine::after {
+            content: '';
+            position: absolute;
+            top: 6%;
+            bottom: 6%;
+            left: 50%;
+            width: 4px;
+            transform: translateX(-50%);
+            background: repeating-linear-gradient(
+                to bottom,
+                rgba(10,10,20,0.9) 0px,
+                rgba(10,10,20,0.9) 9px,
+                transparent 9px,
+                transparent 12px
+            );
+        }
+
+        /* Sol Sayfa */
+        .book-left {
+            flex: 1;
+            height: 100%;
+            position: relative;
+            background: linear-gradient(160deg, #13132a 0%, #1b1b38 50%, #141428 100%);
+            border-radius: 6px 0 0 6px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        /* Sol sayfa çizgili defter dokusu */
+        .book-left::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 27px,
+                rgba(255,255,255,0.05) 27px,
+                rgba(255,255,255,0.05) 28px
+            );
+            z-index: 1;
+            pointer-events: none;
+        }
+        /* Sol sayfa kenar gölgesi (cilt tarafı) */
+        .book-left::after {
+            content: '';
+            position: absolute;
+            right: 0; top: 0; bottom: 0;
+            width: 26px;
+            background: linear-gradient(to left, rgba(0,0,0,0.5), transparent);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* Sol sayfa kağıt dokusu */
+        .book-left-inner {
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(circle at 20% 30%, rgba(39,244,210,0.02) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(138,43,226,0.02) 0%, transparent 50%);
+        }
+
+        .left-page-img {
+            width: 82%;
+            height: 82%;
+            object-fit: cover;
+            border-radius: 4px;
+            box-shadow:
+                0 8px 32px rgba(0,0,0,0.6),
+                0 0 0 1px rgba(255,255,255,0.06);
+            position: relative;
+            z-index: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Sol sayfa numara */
+        .left-page-number {
+            position: absolute;
+            bottom: 14px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 9px;
+            letter-spacing: 3px;
+            color: rgba(255,255,255,0.2);
+            font-family: 'Antonio', sans-serif;
+            z-index: 3;
+        }
+
+        /* Sağ Sayfa Konteyneri */
+        .book-right {
+            flex: 1;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            overflow: hidden;
+        }
+
+        /* Her Bir Yaprak */
+        .page {
+            position: absolute;
+            inset: 0;
+            transform-style: preserve-3d;
+            transform-origin: left center;
+            transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+            border-radius: 0 6px 6px 0;
+        }
+
+        .page-front,
+        .page-back {
+            position: absolute;
+            inset: 0;
+            backface-visibility: hidden;
+            border-radius: 0 6px 6px 0;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .page-front {
+            background: linear-gradient(160deg, #141430 0%, #1a1a3c 60%, #131328 100%);
+        }
+        .page-back {
+            background: linear-gradient(160deg, #131328 0%, #1a1a3c 60%, #141430 100%);
+            transform: rotateY(180deg);
+        }
+
+        /* Sayfa çizgili defter dokusu - daha belirgin */
+        .page-front::before, .page-back::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 27px,
+                    rgba(255,255,255,0.05) 27px,
+                    rgba(255,255,255,0.05) 28px
+                );
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Cilt kenar gölgesi (ön) */
+        .page-front::after {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 30px;
+            background: linear-gradient(to right, rgba(0,0,0,0.5), transparent);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* Cilt kenar gölgesi (arka, ters) */
+        .page-back::after {
+            content: '';
+            position: absolute;
+            right: 0; top: 0; bottom: 0;
+            width: 30px;
+            background: linear-gradient(to left, rgba(0,0,0,0.5), transparent);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .page-photo {
+            width: 82%;
+            height: 82%;
+            object-fit: cover;
+            border-radius: 4px;
+            box-shadow:
+                0 8px 32px rgba(0,0,0,0.6),
+                0 0 0 1px rgba(255,255,255,0.06);
+            pointer-events: none;
+            user-select: none;
+            position: relative;
+            z-index: 1;
+            transition: opacity 0.2s ease;
+        }
+
+        /* Sayfa numarası */
+        .page-num {
+            position: absolute;
+            bottom: 14px;
+            right: 18px;
+            font-size: 9px;
+            letter-spacing: 3px;
+            color: rgba(255,255,255,0.2);
+            font-family: 'Antonio', sans-serif;
+            z-index: 3;
+        }
+        .page-back .page-num {
+            right: auto;
+            left: 18px;
+        }
+
+        /* Parlama efekti */
+        .page-shine {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                105deg,
+                transparent 25%,
+                rgba(255,255,255,0.06) 45%,
+                rgba(255,255,255,0.1) 50%,
+                rgba(255,255,255,0.06) 55%,
+                transparent 75%
+            );
+            pointer-events: none;
+            opacity: 0;
+            z-index: 5;
+            transition: opacity 0.1s;
+        }
+        .page.flipping .page-shine { opacity: 1; }
+
+        /* Katlanmış state */
+        .page.flipped { transform: rotateY(-180deg); }
+
+        /* Kitap alt gölgesi */
+        .book-shadow {
+            position: absolute;
+            bottom: -32px;
+            left: 3%;
+            width: 94%;
+            height: 40px;
+            background: radial-gradient(ellipse, rgba(0,0,0,0.7) 0%, transparent 70%);
+            filter: blur(12px);
+            pointer-events: none;
+        }
+
+        /* Kitap sayfası kenarları (sağ dış) */
+        .book-pages-stack {
+            position: absolute;
+            right: -5px;
+            top: 3px;
+            bottom: 3px;
+            width: 5px;
+            background: repeating-linear-gradient(
+                to bottom,
+                #b8b8a0,
+                #b8b8a0 1px,
+                #d8d8c0 1px,
+                #d8d8c0 3px
+            );
+            border-radius: 0 3px 3px 0;
+            opacity: 0.5;
+        }
+
+        /* KONTROLLER */
+        .book-controls {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+        .book-ctrl-btn {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.15);
+            color: #fff;
+            width: 52px; height: 52px;
+            border-radius: 50%;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(6px);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .book-ctrl-btn:hover {
+            background: rgba(39,244,210,0.15);
+            border-color: var(--teal);
+            color: var(--teal);
+            transform: scale(1.12);
+            box-shadow: 0 0 20px rgba(39,244,210,0.25);
+        }
+        .book-ctrl-btn:disabled {
+            opacity: 0.25;
+            pointer-events: none;
+        }
+        .book-page-info {
+            font-size: 11px;
+            letter-spacing: 3px;
+            color: rgba(255,255,255,0.35);
+            min-width: 90px;
+            text-align: center;
+            font-family: 'Antonio', sans-serif;
+        }
+
+        /* Küçük fotoğraf grid (alt navigator) */
+        .book-thumb-strip {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+        .book-thumb {
+            width: 32px; height: 32px;
+            border-radius: 3px;
+            object-fit: cover;
+            opacity: 0.35;
+            border: 1px solid rgba(255,255,255,0.08);
+            cursor: pointer;
+            transition: all 0.25s;
+        }
+        .book-thumb.active {
+            opacity: 1;
+            border-color: var(--teal);
+            box-shadow: 0 0 8px rgba(39,244,210,0.4);
+        }
+        .book-thumb:hover { opacity: 0.7; }
+
+        /* DRIVE SECTION */
+        .drive-section { text-align: center; gap: 40px; }
+        .drive-section h2 {
+            font-family: 'Antonio', sans-serif;
+            font-size: clamp(28px, 5vw, 60px);
+            letter-spacing: 4px;
+            background: linear-gradient(to right, #fff, var(--teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .drive-section p {
+            font-size: 15px;
+            color: rgba(255,255,255,0.5);
+            letter-spacing: 2px;
+        }
+        .drive-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: linear-gradient(90deg, #fff, #e0e0e0);
+            color: var(--dark);
+            padding: 22px 55px;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.5s ease;
+        }
+        .drive-link i { font-size: 24px; color: #34A853; }
+        .drive-link:hover {
+            transform: translateY(-8px);
+            background: linear-gradient(90deg, var(--teal), #34A853);
+            color: #fff;
+            box-shadow: 0 20px 40px rgba(52,168,83,0.4);
+        }
+        .drive-link:hover i { color: #fff; }
+
+        /* MÜZİK */
+        .music-toggle {
+            position: fixed;
+            bottom: 92px; right: 30px;
+            width: 60px; height: 60px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.18);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        .music-toggle:hover {
+            background: rgba(39,244,210,0.22);
+            border-color: var(--teal);
+            box-shadow: 0 0 20px rgba(39,244,210,0.4);
+            transform: scale(1.1);
+        }
+
+        /* NOKTALAR */
+        .page-dots {
+            position: fixed;
+            right: 22px; top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 500;
+        }
+        .page-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.22);
+            border: 1px solid rgba(255,255,255,0.28);
+            transition: all 0.3s;
+        }
+        .page-dot.active {
+            background: var(--teal);
+            box-shadow: 0 0 8px var(--teal);
+            transform: scale(1.35);
+        }
+
+        /* CURSOR */
+        #trail-container {
+            position: fixed; inset: 0;
+            pointer-events: none;
+            z-index: 9999;
+            overflow: hidden;
+        }
+        .cursor-trail {
+            position: absolute;
+            width: 12px; height: 12px;
+            background: radial-gradient(circle, var(--teal) 0%, var(--purple) 100%);
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            animation: trailFade 0.6s cubic-bezier(0.16,1,0.3,1) forwards;
+            box-shadow: 0 0 10px var(--teal);
+        }
+        .cursor-main {
+            position: fixed;
+            width: 8px; height: 8px;
+            background: #fff;
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 10000;
+            box-shadow: 0 0 5px #fff;
+        }
+        @keyframes trailFade {
+            0%   { opacity: 1; transform: translate(-50%,-50%) scale(1); }
+            100% { opacity: 0; transform: translate(-50%,-50%) scale(0.1); }
+        }
+
+        /* BOTTOM BAR */
+        .bottom-bar {
+            background-color: #65001a;
+            padding: 14px 8%;
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            font-size: 12px;
+            color: rgba(255,255,255,0.5);
+            flex-shrink: 0;
+            z-index: 600;
+            position: relative;
+        }
+
+        /* MOBİL */
+        @media (max-width: 768px) {
+            .day-left { display: none; }
+            .album-cover { width: 140px; height: 200px; }
+            .book { width: 96vw; height: 58vw; min-height: 240px; }
+            .book-spine { width: 16px; }
+            .book-thumb-strip { display: none; }
+            .music-toggle { bottom: 78px; right: 18px; width: 48px; height: 48px; }
+            .page-dots { display: none; }
+            .bottom-bar { flex-direction: column; gap: 6px; padding: 12px 6%; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<audio id="bg-music" src="memory-song.mp3" loop></audio>
+<div class="bg-gradient"></div>
+
+<div id="trail-container">
+    <div class="cursor-main" id="cursor-main"></div>
+</div>
+
+<div class="music-toggle" id="music-toggle">
+    <i class="fas fa-volume-up"></i>
+</div>
+
+<nav class="page-dots" id="page-dots"></nav>
+
+<div class="book-overlay" id="book-overlay">
+    <button class="book-overlay-close" id="book-overlay-close"><i class="fas fa-times"></i></button>
+
+    <div class="book-scene">
+        <div class="book" id="the-book">
+            <div class="book-left">
+                <div class="book-left-inner"></div>
+                <img src="" alt="" class="left-page-img" id="left-page-img">
+                <div class="left-page-number" id="left-page-number">1 / 10</div>
+            </div>
+
+            <div class="book-spine"></div>
+
+            <div class="book-right" id="book-right-page">
+                <div class="book-pages-stack"></div>
+            </div>
+        </div>
+        <div class="book-shadow"></div>
+    </div>
+
+    <div style="display:flex; flex-direction:column; align-items:center; gap:16px;">
+        <div class="book-controls">
+            <button class="book-ctrl-btn" id="book-prev"><i class="fas fa-chevron-left"></i></button>
+            <span class="book-page-info" id="book-page-info">1 / 10</span>
+            <button class="book-ctrl-btn" id="book-next"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <div class="book-thumb-strip" id="book-thumb-strip"></div>
+    </div>
+</div>
+
+<div class="scroll-container" id="scroll-container">
+
+    <section id="sec-0" class="intro-screen">
+        <h1 class="reveal active">Rayfelmun '27</h1>
+        <p class="reveal active" style="transition-delay:.2s">Moments Pass, Memories Last</p>
+        <button class="start-journey-btn reveal active" id="start-btn" style="transition-delay:.4s">
+            Start Exploring
+        </button>
+    </section>
+
+    <section id="sec-1">
+        <div class="day-layout">
+            <div class="day-left">
+                <div class="day-outline-text reveal">DAY<span>01</span></div>
+            </div>
+            <div class="day-right">
+                <h2 class="day-title-small reveal">Day 01</h2>
+                <div class="album-cover-wrap reveal" style="transition-delay:.15s">
+                    <div class="album-cover" id="cover-1"
+                         data-photos='["memory/day1-1.jpg","memory/day1-2.jpg","memory/day1-3.jpg","memory/day1-4.jpg","memory/day1-5.jpg","memory/day1-6.jpg","memory/day1-7.jpg"]'>
+                        <div class="cover-front">
+                            <img src="memory/day1-1.jpg" alt="Day 1 Cover"
+                                 onerror="console.error('KAPAK YÜKLENEMEDİ:', this.src); this.parentElement.style.background='repeating-linear-gradient(45deg,#3a1a1a,#3a1a1a 10px,#2a0f0f 10px,#2a0f0f 20px)';">
+                        </div>
+                        <div class="cover-spine"></div>
+                        <div class="cover-pages-edge"></div>
+                        <div class="cover-back"></div>
+                    </div>
+                    <div class="open-hint"><i class="fas fa-book-open"></i> Tap to open</div>
+                </div>
+                <button class="next-day-btn reveal" style="transition-delay:.3s" data-target="sec-2">Day 02 →</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="sec-2">
+        <div class="day-layout">
+            <div class="day-left">
+                <div class="day-outline-text reveal">DAY<span>02</span></div>
+            </div>
+            <div class="day-right">
+                <h2 class="day-title-small reveal">Day 02</h2>
+                <div class="album-cover-wrap reveal" style="transition-delay:.15s">
+                    <div class="album-cover" id="cover-2"
+                         data-photos='["memory/day2-1.jpg","memory/day2-2.jpg","memory/day2-3.jpg","memory/day2-4.jpg","memory/day2-5.jpg","memory/day2-6.jpg","memory/day2-7.jpg"]'>
+                        <div class="cover-front">
+                            <img src="memory/day2-1.jpg" alt="Day 2 Cover"
+                                 onerror="console.error('KAPAK YÜKLENEMEDİ:', this.src); this.parentElement.style.background='repeating-linear-gradient(45deg,#3a1a1a,#3a1a1a 10px,#2a0f0f 10px,#2a0f0f 20px)';">
+                        </div>
+                        <div class="cover-spine"></div>
+                        <div class="cover-pages-edge"></div>
+                        <div class="cover-back"></div>
+                    </div>
+                    <div class="open-hint"><i class="fas fa-book-open"></i> Tap to open</div>
+                </div>
+                <button class="next-day-btn reveal" style="transition-delay:.3s" data-target="sec-3">Day 03 →</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="sec-3">
+        <div class="day-layout">
+            <div class="day-left">
+                <div class="day-outline-text reveal">DAY<span>03</span></div>
+            </div>
+            <div class="day-right">
+                <h2 class="day-title-small reveal">Day 03</h2>
+                <div class="album-cover-wrap reveal" style="transition-delay:.15s">
+                    <div class="album-cover" id="cover-3"
+                         data-photos='["memory/day3-1.jpg","memory/day3-2.jpg","memory/day3-3.jpg","memory/day3-4.jpg","memory/day3-5.jpg","memory/day3-6.jpg","memory/day3-7.jpg"]'>
+                        <div class="cover-front">
+                            <img src="memory/day3-1.jpg" alt="Day 3 Cover"
+                                 onerror="console.error('KAPAK YÜKLENEMEDİ:', this.src); this.parentElement.style.background='repeating-linear-gradient(45deg,#3a1a1a,#3a1a1a 10px,#2a0f0f 10px,#2a0f0f 20px)';">
+                        </div>
+                        <div class="cover-spine"></div>
+                        <div class="cover-pages-edge"></div>
+                        <div class="cover-back"></div>
+                    </div>
+                    <div class="open-hint"><i class="fas fa-book-open"></i> Tap to open</div>
+                </div>
+                <button class="next-day-btn reveal" style="transition-delay:.3s" data-target="sec-4">Full Archive →</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="sec-4" class="drive-section">
+        <h2 class="reveal">Every Moment.</h2>
+        <p class="reveal" style="transition-delay:.15s">The full archive lives here.</p>
+        <a href="https://drive.google.com/drive/folders/1IifH_qEQwCcilPvx4R9shZSWQ1xq4qRY"
+           target="_blank" rel="noopener"
+           class="drive-link reveal" style="transition-delay:.3s">
+            <i class="fab fa-google-drive"></i> Access Full Archive
+        </a>
+    </section>
+
+</div>
+
+<div class="bottom-bar">
+    <div>© Rayfelmun 2026. All rights reserved.</div>
+    <div>Shooted/Crafted with ❤️ by Kaan Kurt/Ada Özkan</div>
+</div>
+
+<script>
+/* CURSOR */
+const trailCont  = document.getElementById('trail-container');
+const cursorMain = document.getElementById('cursor-main');
+document.addEventListener('mousemove', e => {
+    cursorMain.style.left = e.clientX + 'px';
+    cursorMain.style.top  = e.clientY + 'px';
+    const dot = document.createElement('div');
+    dot.className = 'cursor-trail';
+    dot.style.left = e.clientX + 'px';
+    dot.style.top  = e.clientY + 'px';
+    trailCont.appendChild(dot);
+    setTimeout(() => dot.remove(), 600);
+});
+document.addEventListener('mousedown', () => cursorMain.style.transform = 'translate(-50%,-50%) scale(2)');
+document.addEventListener('mouseup',   () => cursorMain.style.transform = 'translate(-50%,-50%) scale(1)');
+
+/* MÜZİK */
+const bgMusic   = document.getElementById('bg-music');
+const musicBtn  = document.getElementById('music-toggle');
+const musicIcon = musicBtn.querySelector('i');
+let musicStarted = false;
+document.body.addEventListener('click', e => {
+    if (e.target.closest('#music-toggle')) return;
+    if (!musicStarted) {
+        bgMusic.play().catch(() => {});
+        musicStarted = true;
+        musicIcon.className = 'fas fa-volume-up';
+    }
+}, { once: true });
+musicBtn.addEventListener('click', () => {
+    if (bgMusic.paused) {
+        bgMusic.play();
+        musicIcon.className = 'fas fa-volume-up';
+        musicStarted = true;
+    } else {
+        bgMusic.pause();
+        musicIcon.className = 'fas fa-volume-mute';
+    }
+});
+
+/* SCROLL / SECTIONS */
+const sections   = Array.from(document.querySelectorAll('#scroll-container section'));
+const scrollCont = document.getElementById('scroll-container');
+const dotsNav    = document.getElementById('page-dots');
+sections.forEach((sec, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'page-dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => sec.scrollIntoView({ behavior: 'smooth' }));
+    dotsNav.appendChild(dot);
+});
+const dots = Array.from(dotsNav.querySelectorAll('.page-dot'));
+sections.forEach(s =>
+    new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting) {
+            const idx = sections.indexOf(s);
+            dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+        }
+    }, { root: scrollCont, threshold: 0.5 }).observe(s)
+);
+document.getElementById('start-btn').addEventListener('click', () =>
+    document.getElementById('sec-1').scrollIntoView({ behavior: 'smooth' })
+);
+document.querySelectorAll('.next-day-btn').forEach(btn =>
+    btn.addEventListener('click', () =>
+        document.getElementById(btn.dataset.target)?.scrollIntoView({ behavior: 'smooth' })
+    )
+);
+
+/* SCROLL REVEAL */
+const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(e => e.target.classList.toggle('active', e.isIntersecting));
+}, { root: scrollCont, threshold: 0.22 });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+/* ══════════════════════════════════════
+   DEFTER (10 FOTOĞRAF = 10 SAYFA)
+══════════════════════════════════════ */
+const bookOverlay       = document.getElementById('book-overlay');
+const bookRightContainer = document.getElementById('book-right-page');
+const leftPageImg       = document.getElementById('left-page-img');
+const leftPageNum       = document.getElementById('left-page-number');
+const bookPageInfo      = document.getElementById('book-page-info');
+const thumbStrip        = document.getElementById('book-thumb-strip');
+const btnPrev           = document.getElementById('book-prev');
+const btnNext           = document.getElementById('book-next');
+const overlayClose      = document.getElementById('book-overlay-close');
+
+let bookPhotos   = [];
+let bookPages    = [];
+let currentSpread = 0;
+let isFlipping   = false;
+
+function buildBook(photos) {
+    const pagesStack = bookRightContainer.querySelector('.book-pages-stack');
+    bookRightContainer.innerHTML = '';
+    if (pagesStack) bookRightContainer.appendChild(pagesStack);
+    bookPages = [];
+
+    thumbStrip.innerHTML = '';
+    photos.forEach((src, i) => {
+        const th = document.createElement('img');
+        th.className = 'book-thumb' + (i === 0 ? ' active' : '');
+        th.src = src;
+        th.alt = 'Fotoğraf ' + (i + 1);
+        th.addEventListener('click', () => jumpToSpread(i));
+        thumbStrip.appendChild(th);
+    });
+
+    const pageCount = photos.length - 1;
+    for (let i = 0; i < pageCount; i++) {
+        const page = document.createElement('div');
+        page.className = 'page';
+
+        const front = document.createElement('div');
+        front.className = 'page-front';
+        const frontImg = document.createElement('img');
+        frontImg.className = 'page-photo';
+        frontImg.src = photos[i + 1];
+        frontImg.alt = 'Fotoğraf ' + (i + 2);
+        const frontNum = document.createElement('span');
+        frontNum.className = 'page-num';
+        frontNum.textContent = (i + 2) + ' / ' + photos.length;
+        const frontShine = document.createElement('div');
+        frontShine.className = 'page-shine';
+        front.append(frontImg, frontNum, frontShine);
+
+        const back = document.createElement('div');
+        back.className = 'page-back';
+        const backImg = document.createElement('img');
+        backImg.className = 'page-photo';
+        backImg.src = photos[i + 1];
+        backImg.alt = 'Fotoğraf ' + (i + 2);
+        const backNum = document.createElement('span');
+        backNum.className = 'page-num';
+        backNum.textContent = (i + 2) + ' / ' + photos.length;
+        const backShine = document.createElement('div');
+        backShine.className = 'page-shine';
+        back.append(backImg, backNum, backShine);
+
+        page.append(front, back);
+        bookRightContainer.appendChild(page);
+        bookPages.push(page);
+    }
+}
+
+function updateThumbs(spread) {
+    const thumbs = thumbStrip.querySelectorAll('.book-thumb');
+    thumbs.forEach((th, i) => th.classList.toggle('active', i === spread));
+    if (thumbs[spread]) thumbs[spread].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+}
+
+function setSpread(spread, animate) {
+    const total = bookPages.length;
+
+    bookPages.forEach((page, i) => {
+        const shouldFlip = i < spread;
+        if (animate) {
+            const changing = (shouldFlip && !page.classList.contains('flipped'))
+                          || (!shouldFlip && page.classList.contains('flipped'));
+            if (changing) {
+                page.classList.add('flipping');
+                setTimeout(() => page.classList.remove('flipping'), 500);
+            }
+        }
+        page.classList.toggle('flipped', shouldFlip);
+        page.style.zIndex = shouldFlip ? i : (total - i);
+    });
+
+    leftPageImg.style.opacity = '0';
+    setTimeout(() => {
+        leftPageImg.src = bookPhotos[spread] || '';
+        leftPageImg.style.opacity = '1';
+    }, animate ? 300 : 0);
+
+    leftPageNum.textContent = (spread + 1) + ' / ' + bookPhotos.length;
+    bookPageInfo.textContent = (spread + 1) + ' / ' + bookPhotos.length;
+    btnPrev.disabled = spread === 0;
+    btnNext.disabled = spread === bookPhotos.length - 1;
+    updateThumbs(spread);
+}
+
+function jumpToSpread(target) {
+    if (isFlipping) return;
+    if (target === currentSpread) return;
+    isFlipping = true;
+    currentSpread = target;
+    setSpread(currentSpread, true);
+    setTimeout(() => isFlipping = false, 1050);
+}
+
+function openBook(photos) {
+    bookPhotos = photos;
+    buildBook(photos);
+    currentSpread = 0;
+    setSpread(0, false);
+    bookOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeBook() {
+    bookOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+}
+
+btnNext.addEventListener('click', () => {
+    if (isFlipping || currentSpread >= bookPhotos.length - 1) return;
+    isFlipping = true;
+    currentSpread++;
+    setSpread(currentSpread, true);
+    setTimeout(() => isFlipping = false, 1050);
+});
+
+btnPrev.addEventListener('click', () => {
+    if (isFlipping || currentSpread <= 0) return;
+    isFlipping = true;
+    currentSpread--;
+    setSpread(currentSpread, true);
+    setTimeout(() => isFlipping = false, 1050);
+});
+
+overlayClose.addEventListener('click', closeBook);
+bookOverlay.addEventListener('click', e => { if (e.target === bookOverlay) closeBook(); });
+
+document.addEventListener('keydown', e => {
+    if (!bookOverlay.classList.contains('open')) return;
+    if (e.key === 'Escape')      closeBook();
+    if (e.key === 'ArrowRight')  btnNext.click();
+    if (e.key === 'ArrowLeft')   btnPrev.click();
+});
+
+let touchStartX = 0;
+bookOverlay.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+bookOverlay.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 50) { dx < 0 ? btnNext.click() : btnPrev.click(); }
+});
+
+document.querySelectorAll('.album-cover').forEach(cover => {
+    cover.addEventListener('click', () => {
+        let photos = [];
+        try { photos = JSON.parse(cover.dataset.photos); } catch(e) {}
+        if (photos.length) openBook(photos);
+    });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy | Rayfelmun '26</title>
+
+    <meta name="description" content="Official Privacy Policy and Data Protection guidelines for the Rayfelmun '26 conference.">
+    <link rel="canonical" href="https://rayfelmun.org/privacy.html" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" type="image/png" sizes="256x256" href="rayfelmunLogo.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="rayfelmunLogo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="rayfelmunLogo.png">
+    <link rel="apple-touch-icon" href="rayfelmunLogo.png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        @font-face {
+            font-family: 'Northwell';
+            src: url('Northwell.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #142948;
+            overflow-x: hidden;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            background: linear-gradient(to bottom, #142948 0%, rgb(21,21,30) 100%);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            z-index: 1001;
+        }
+
+        .logo-area img { 
+            height: 50px;
+            width: auto;
+        }
+
+        .logo-area span {
+            font-family: 'Northwell', cursive;
+            font-size: 34px;
+            color: #ffffff;
+        }
+
+        .menu-toggle {
+            display: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 18px;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            opacity: 0.7;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active { 
+            opacity: 1; 
+            color: #27f4d2;
+        }
+
+        .apply-btn-nav {
+            background-color: #111111;
+            color: white;
+            padding: 10px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border: 1px solid rgba(255,255,255,0.15);
+            transition: 0.3s;
+        }
+
+        .apply-btn-nav:hover {
+            background: white;
+            color: #142948;
+            transform: translateY(-2px);
+        }
+
+        /* --- LEGAL CONTENT --- */
+        .legal-section {
+            padding: 160px 5% 100px 5%;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .legal-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .legal-header .label {
+            font-family: 'Northwell', cursive;
+            font-size: clamp(60px, 12vw, 80px);
+            color: #142948;
+            margin-bottom: -10px;
+            display: block;
+        }
+
+        .legal-header h1 {
+            font-family: 'Antonio', sans-serif;
+            font-size: clamp(32px, 8vw, 60px);
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            margin-bottom: 15px;
+            color: #142948;
+            line-height: 1;
+        }
+
+        .legal-header .subtitle {
+            font-size: clamp(14px, 4vw, 18px);
+            color: #666;
+            font-weight: 300;
+        }
+
+        .legal-card {
+            background: #f8f9fa;
+            border-radius: 25px;
+            padding: clamp(25px, 5vw, 50px);
+            border: 1px solid #eee;
+            box-shadow: 0 10px 30px rgba(20, 41, 72, 0.04);
+        }
+
+        .legal-card h2 {
+            font-family: 'Antonio', sans-serif;
+            font-size: 22px;
+            color: #142948;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 35px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 8px;
+        }
+
+        .legal-card h2:first-of-type {
+            margin-top: 0;
+        }
+
+        .legal-card p {
+            font-size: 15px;
+            line-height: 1.8;
+            color: #444;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .legal-card ul {
+            margin-bottom: 25px;
+            padding-left: 20px;
+        }
+
+        .legal-card li {
+            font-size: 15px;
+            line-height: 1.8;
+            color: #444;
+            margin-bottom: 8px;
+        }
+
+        .update-date {
+            display: inline-block;
+            background: rgba(39, 244, 210, 0.15);
+            color: #142948;
+            font-weight: 600;
+            font-size: 12px;
+            padding: 6px 16px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: rgb(21,21,30);
+            padding: 80px 8% 40px 8%;
+            display: grid;
+            grid-template-columns: 1.8fr 1fr 1fr 1fr;
+            gap: 40px;
+            color: white;
+            align-items: start;
+        }
+
+        .footer-brand img { width: 250px; height: auto; margin-bottom: 25px; display: block; }
+        .footer-brand h2 { font-family: 'Antonio', sans-serif; font-size: 36px; text-transform: uppercase; line-height: 1.1; }
+        .footer-brand h2 span { color: #27f4d2; font-family: 'Antonio', sans-serif; }
+        .footer-brand p { opacity: 0.6; font-style: italic; margin-top: 10px; font-size: 15px; }
+
+        .footer-col h4 { font-size: 12px; letter-spacing: 2px; margin-bottom: 25px; color: #27f4d2; text-transform: uppercase; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 12px; }
+        .footer-col ul li a { color: white; text-decoration: none; opacity: 0.6; transition: 0.3s; font-size: 13px; font-weight: 600; text-transform: uppercase; }
+        .footer-col ul li a:hover { opacity: 1; color: #27f4d2; padding-left: 5px; }
+
+        .social-icons { display: flex; gap: 20px; }
+        .social-icons a { color: white; }
+        .social-icons i { font-size: 22px; opacity: 0.7; transition: 0.3s; cursor: pointer; }
+        .social-icons i:hover { opacity: 1; color: #27f4d2; transform: translateY(-3px); }
+
+        .bottom-bar {
+            background-color: #65001a;
+            padding: 30px 8%;
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            font-size: 12px;
+            color: rgba(255,255,255,0.5);
+        }
+
+        @media (max-width: 968px) { footer { grid-template-columns: 1.5fr 1fr; } }
+        @media (max-width: 768px) {
+            .menu-toggle { display: block; }
+            .nav-right {
+                position: fixed; top: 0; right: -100%; width: 80%; height: 100vh;
+                background: rgb(21,21,30); flex-direction: column; justify-content: center;
+                gap: 40px; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); z-index: 1000;
+                box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+            }
+            .nav-right.active { right: 0; }
+            .nav-links { flex-direction: column; align-items: center; gap: 25px; }
+            .nav-links a { font-size: 16px; opacity: 1; }
+            .legal-section { padding-top: 140px; }
+            footer { grid-template-columns: 1fr; text-align: center; }
+            .footer-brand img { margin: 0 auto 20px auto; width: 200px; }
+            .social-icons { justify-content: center; }
+            .bottom-bar { flex-direction: column; gap: 15px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo-area">
+            <img src="rayfelmunLogo.jpg" alt="Rayfelmun Logo">
+            <span>Rayfelmun</span>
+        </a>
+        <div class="menu-toggle" id="mobile-menu">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class="nav-right" id="nav-menu">
+            <ul class="nav-links">
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="about.html">ABOUT</a></li>
+                <li><a href="team.html">TEAM</a></li>
+                <li><a href="committees.html">COMMITTEES</a></li> 
+                <li><a href="calendar.html">CALENDAR</a></li>
+                <li><a href="venue.html">VENUE</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">CONTACT</a></li>
+            </ul>
+            <a href="apply.html" class="apply-btn-nav">APPLY NOW</a>
+        </div>
+    </nav>
+
+    <section class="legal-section">
+        <div class="legal-header">
+            <span class="label">Legal</span>
+            <h1>Privacy Policy</h1>
+            <p class="subtitle">"Strict Data Protection & Privacy Standards"</p>
+        </div>
+
+        <div class="legal-card">
+            <span class="update-date">EFFECTIVE AS OF: AUGUST 2026</span>
+
+            <p>The Rayfelmun Organization Committee ("we", "us", "our") is strictly committed to protecting the privacy, security, and confidentiality of all delegates, advisors, and guests. This Privacy Policy dictates the collection, processing, and strict safeguarding of your data.</p>
+
+            <h2>1. Strict Data Collection Protocol</h2>
+            <p>During the application and registration process, we mandatorily collect the following information. Providing false or misleading data will result in immediate rejection of the application:</p>
+            <ul>
+                <li><strong>Identity & Contact:</strong> Full legal name, date of birth, phone number, and primary e-mail address.</li>
+                <li><strong>Academic Affiliation:</strong> School name, grade level, and academic background.</li>
+                <li><strong>Conference Data:</strong> MUN experience, committee preferences, position papers, and dietary/medical requirements.</li>
+                <li><strong>Digital Footprint:</strong> IP addresses and browser configurations when accessing rayfelmun.org to ensure website security.</li>
+            </ul>
+
+            <h2>2. Permitted Use of Information</h2>
+            <p>Your data is processed exclusively for the operational execution of the conference. We use your data strictly to:</p>
+            <ul>
+                <li>Conduct background checks on applications and finalize committee allocations.</li>
+                <li>Transmit urgent conference updates, official study guides, and logistical details.</li>
+                <li>Accommodate specific medical or dietary necessities during the conference.</li>
+                <li>Print official placards, ID badges, and Certificates of Participation/Awards.</li>
+            </ul>
+
+            <h2>3. Absolute Media & Consent Rights</h2>
+            <p>By registering for and attending Rayfelmun, you grant the Organization Committee an <strong>irrevocable, royalty-free, and perpetual right</strong> to use, publish, and distribute photographs, video recordings, and audio captures featuring your likeness. These materials will be utilized for official after-movies, social media campaigns, and promotional archives. Requests for the removal of group footage cannot be accommodated.</p>
+
+            <h2>4. Zero-Tolerance Data Sharing Policy</h2>
+            <p><strong>We do not, and will never, sell, trade, rent, or distribute your personal information to third parties.</strong> Data is accessible solely by authorized Secretariat members. The only exception to this protocol is compliance with a formal legal request from Turkish law enforcement authorities or school administration (Ramazan Yaman Science High School) in the event of an emergency or disciplinary breach.</p>
+
+            <h2>5. Data Retention & Permanent Deletion</h2>
+            <p>All sensitive personal data (including dietary restrictions, medical notes, and phone numbers) will be permanently purged from our databases within <strong>90 days</strong> following the closing ceremony of the conference. Basic records (names and awards) are retained in our historical archives.</p>
+
+            <h2>6. User Rights & Inquiries</h2>
+            <p>You reserve the right to request access to or correction of your personal data before the conference begins. For any inquiries regarding our strict data protocols, you must contact the Secretariat officially at the e-mail address provided in our contact section.</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-brand">
+            <img src="rayfelmunLogo.jpg" alt="Logo">
+            <h2>Rayfelmun<span>26</span></h2>
+            <p>Your voice can change the world</p>
+        </div>
+        <div class="footer-col">
+            <h4>CONFERENCE</h4>
+            <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="about.html">ABOUT</a></li>
+                <li><a href="team.html">TEAM</a></li>
+                <li><a href="committees.html">COMMITTEES</a></li> 
+                <li><a href="calendar.html">CALENDAR</a></li>
+                <li><a href="venue.html">VENUE</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">CONTACT</a></li>
+                <li><a href="apply.html" style="color:#27f4d2;">APPLY NOW</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>LEGAL</h4>
+            <ul>
+                <li><a href="privacy.html" style="color:#27f4d2;">prıvacy polıcy</a></li>
+                <li><a href="terms.html">Terms of Service</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>SOCIAL</h4>
+            <div class="social-icons">
+                <a href="https://www.instagram.com/rayfelmun/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <i class="fab fa-tiktok"></i>
+                <a href="https://www.linkedin.com/school/ramazan-yaman-fen-lisesi/" target="_blank"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="bottom-bar">
+        <div>© Rayfelmun 2026. All rights reserved.</div>
+        <div>Crafted with ❤️ by Ada Özkan</div>
+    </div>
+
+    <script>
+        const menuToggle = document.getElementById('mobile-menu');
+        const navMenu = document.getElementById('nav-menu');
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            const icon = menuToggle.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+    </script>
+</body>
+</html>

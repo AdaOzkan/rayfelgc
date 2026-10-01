@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Rayfelmun '27</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    
+    <link rel="icon" type="image/png" sizes="256x256" href="rayfelmunLogo.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="rayfelmunLogo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="rayfelmunLogo.png">
+    <link rel="apple-touch-icon" href="rayfelmunLogo.png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        @font-face {
+            font-family: 'Northwell';
+            src: url('Northwell.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #142948;
+            overflow-x: hidden;
+        }
+
+        /* --- NAVIGASYON --- */
+        nav {
+            background: linear-gradient(to bottom, #142948 0%, rgb(21,21,30) 100%);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 5%; /* Yükseklik logo için optimize edildi */
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            z-index: 1001;
+        }
+
+        .logo-area img { 
+            height: 50px; /* Logo 50px yapıldı */
+            width: auto;
+        }
+
+        .logo-area span {
+            font-family: 'Northwell', cursive;
+            font-size: 34px;
+            color: #ffffff;
+        }
+
+        .menu-toggle {
+            display: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 18px;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            opacity: 0.7;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active { 
+            opacity: 1; 
+            color: #27f4d2;
+        }
+
+        .apply-btn-nav {
+            background-color: #111111;
+            color: white;
+            padding: 10px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border: 1px solid rgba(255,255,255,0.15);
+            transition: 0.3s;
+        }
+
+        .apply-btn-nav:hover {
+            background: white;
+            color: #142948;
+            transform: translateY(-2px);
+        }
+
+        /* --- CONTACT HEADER --- */
+        .contact-section {
+            padding: 160px 5% 100px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .contact-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .contact-header .label {
+            font-family: 'Northwell', cursive;
+            font-size: clamp(60px, 12vw, 80px);
+            color: #142948;
+            margin-bottom: -10px;
+            display: block;
+        }
+
+        .contact-header h1 {
+            font-family: 'Antonio', sans-serif;
+            font-size: clamp(32px, 8vw, 60px);
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            color: #142948;
+            line-height: 1;
+        }
+
+        /* --- CONTACT GRID --- */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 50px;
+            align-items: stretch;
+        }
+
+        /* --- INFO CARDS --- */
+        .info-panel {
+            display: grid;
+            gap: 25px;
+        }
+
+        .info-item {
+            background: #f8f9fa;
+            padding: clamp(25px, 5vw, 40px);
+            border-radius: 40px;
+            border: 1px solid #eee;
+            transition: 0.4s;
+        }
+
+        .info-item:hover {
+            background: #ffffff;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            border-color: #27f4d2;
+            transform: translateY(-5px);
+        }
+
+        .info-item i {
+            font-size: 24px;
+            color: #27f4d2;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .info-item h3 {
+            font-family: 'Antonio', sans-serif;
+            font-size: 20px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            color: #142948;
+        }
+
+        .info-item p, .info-item a {
+            color: #666;
+            line-height: 1.6;
+            font-size: 15px;
+            text-decoration: none;
+        }
+
+        .info-item a { font-weight: 600; color: #142948; transition: 0.3s; }
+        .info-item a:hover { color: #27f4d2; }
+
+        .call-person { margin-bottom: 15px; }
+        .call-person strong { display: block; font-size: 13px; color: #142948; margin-bottom: 3px; }
+
+        /* --- CONTACT FORM --- */
+        .form-panel {
+            background: linear-gradient(135deg, #142948 0%, #0a1526 100%);
+            padding: clamp(30px, 6vw, 60px);
+            border-radius: 50px;
+            color: white;
+            box-shadow: 0 30px 60px rgba(20, 41, 72, 0.2);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .form-group {
+            display: grid;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            opacity: 0.6;
+            font-weight: 700;
+            padding-left: 5px;
+        }
+
+        .form-group input, .form-group textarea {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: white;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .form-group input {
+            padding: 20px 25px;
+            border-radius: 18px;
+            font-size: 14px;
+        }
+
+        .form-group textarea {
+            padding: 20px 25px;
+            border-radius: 22px;
+            resize: none; 
+            min-height: 280px; 
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: #27f4d2;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .send-btn {
+            width: 100%;
+            background: #27f4d2;
+            color: #142948;
+            padding: 20px;
+            border-radius: 20px;
+            border: none;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .send-btn:hover { background: #ffffff; transform: scale(1.02); }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: rgb(21,21,30);
+            padding: 80px 8% 40px 8%;
+            display: grid;
+            grid-template-columns: 1.8fr 1fr 1fr 1fr;
+            gap: 40px;
+            color: white;
+            align-items: start;
+        }
+
+        .footer-brand img { width: 250px; height: auto; margin-bottom: 25px; display: block; }
+        .footer-brand h2 { font-family: 'Antonio', sans-serif; font-size: 36px; text-transform: uppercase; line-height: 1.1; }
+        .footer-brand h2 span { color: #27f4d2; font-family: 'Antonio', sans-serif; }
+        .footer-brand p { opacity: 0.6; font-style: italic; margin-top: 10px; font-size: 15px; }
+
+        .footer-col h4 { font-size: 12px; letter-spacing: 2px; margin-bottom: 25px; color: #27f4d2; text-transform: uppercase; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 12px; }
+        .footer-col ul li a { color: white; text-decoration: none; opacity: 0.6; transition: 0.3s; font-size: 13px; font-weight: 600; text-transform: uppercase; }
+        .footer-col ul li a:hover { opacity: 1; color: #27f4d2; padding-left: 5px; }
+
+        .social-icons { display: flex; gap: 20px; }
+        .social-icons a { color: white; }
+        .social-icons i { font-size: 22px; opacity: 0.7; transition: 0.3s; }
+        .social-icons i:hover { opacity: 1; color: #27f4d2; transform: translateY(-3px); }
+
+        .bottom-bar {
+            background-color: #65001a;
+            padding: 30px 8%;
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            font-size: 12px;
+            color: rgba(255,255,255,0.5);
+        }
+
+        /* --- MOBILE --- */
+        @media (max-width: 968px) {
+            .contact-grid { grid-template-columns: 1fr; }
+            footer { grid-template-columns: 1.5fr 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle { display: block; }
+            .nav-right {
+                position: fixed;
+                top: 0; right: -100%;
+                width: 80%; height: 100vh;
+                background: rgb(21,21,30);
+                flex-direction: column;
+                justify-content: center;
+                gap: 40px;
+                transition: 0.4s;
+                z-index: 1000;
+                box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+            }
+            .nav-right.active { right: 0; }
+            .nav-links { flex-direction: column; align-items: center; gap: 25px; }
+            .nav-links a { font-size: 16px; }
+            
+            footer { grid-template-columns: 1fr; text-align: center; }
+            .footer-brand img { margin: 0 auto 20px auto; width: 200px; }
+            .social-icons { justify-content: center; }
+            .bottom-bar { flex-direction: column; gap: 15px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo-area">
+            <img src="rayfelmunLogo.jpg" alt="Logo">
+            <span>Rayfelmun</span>
+        </a>
+        <div class="menu-toggle" id="mobile-menu">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class="nav-right" id="nav-menu">
+            <ul class="nav-links">
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="about.html">ABOUT</a></li>
+                <li><a href="team.html">TEAM</a></li>
+                <li><a href="committees.html">COMMITTEES</a></li> 
+                <li><a href="calendar.html">CALENDAR</a></li> <li><a href="venue.html">VENUE</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html" class="active">CONTACT</a></li>
+            </ul>
+            <a href="apply.html" class="apply-btn-nav">APPLY NOW</a>
+        </div>
+    </nav>
+
+    <section class="contact-section">
+        <div class="contact-header">
+            <span class="label">Contact</span>
+            <h1>Get ın touch wıth us</h1>
+        </div>
+
+        <div class="contact-grid">
+            <div class="info-panel">
+                <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Emaıl Us</h3>
+                    <p>For all inquiries and support:</p>
+                    <a href="mailto:rayfelmun39@gmail.com">rayfelmun39@gmail.com</a>
+                </div>
+
+                <div class="info-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <h3>Call Us</h3>
+                    <div class="call-detail">
+                        <div class="call-person">
+                            <strong>Advisor: Duygu Yıldız</strong>
+                            <a href="tel:+90 532 166 27 40">+90 (532) 166 27 40</a>
+                        </div>
+                        <div class="call-person">
+                            <strong>Director General: Kayra Çağlayan</strong>
+                            <a href="tel:+90 538 405 24 75">+90 (538) 405 24 75</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Our Locatıon</h3>
+                    <p>Lüleburgaz Ramazan Yaman Fen Lisesi<br>Kırklareli, Türkiye</p>
+                </div>
+
+                <div class="info-item">
+                    <i class="fab fa-instagram"></i>
+                    <h3>Follow Us</h3>
+                    <p>Stay updated on Instagram</p>
+                    <a href="https://www.instagram.com/rayfelmun/" target="_blank">@rayfelmun</a>
+                </div>
+            </div>
+
+            <div class="form-panel">
+                <form class="contact-form" action="https://formspree.io/f/mvzdvybw" method="POST">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" name="full_name" placeholder="Your name and surname" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Emaıl Address</label>
+                        <input type="email" name="email" placeholder="email@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Subject</label>
+                        <input type="text" name="subject" placeholder="What is this regarding?">
+                    </div>
+                    <div class="form-group">
+                        <label>Your Message</label>
+                        <textarea name="message" placeholder="Write your message here..." required></textarea>
+                    </div>
+                    <button type="submit" class="send-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-brand">
+            <img src="rayfelmunLogo.jpg" alt="Logo">
+            <h2>Rayfelmun<span>26</span></h2>
+            <p>Your voice can change the world</p>
+        </div>
+        <div class="footer-col">
+            <h4>CONFERENCE</h4>
+            <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="about.html">ABOUT</a></li>
+                <li><a href="team.html">TEAM</a></li>
+                <li><a href="committees.html">COMMITTEES</a></li> 
+                <li><a href="calendar.html">CALENDAR</a></li>
+                <li><a href="venue.html">VENUE</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">CONTACT</a></li>
+                <li><a href="apply.html" style="color:#27f4d2;">APPLY NOW</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>LEGAL</h4>
+            <ul>
+                <li><a href="privacy.html">prıvacy polıcy</a></li>
+                <li><a href="terms.html">Terms of Service</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>SOCIAL</h4>
+            <div class="social-icons">
+                <a href="https://www.instagram.com/rayfelmun/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <i class="fab fa-tiktok"></i>
+                <a href="https://www.linkedin.com/school/ramazan-yaman-fen-lisesi/" target="_blank"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="bottom-bar">
+        <div>© Rayfelmun 2026. All rights reserved.</div>
+        <div>Crafted with ❤️ by Ada Özkan</div>
+    </div>
+
+    <script>
+        const menuToggle = document.getElementById('mobile-menu');
+        const navMenu = document.getElementById('nav-menu');
+
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            const icon = menuToggle.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+    </script>
+</body>
+</html>

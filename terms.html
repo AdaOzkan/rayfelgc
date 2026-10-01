@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service | Rayfelmun '26</title>
+
+    <meta name="description" content="Strict Terms of Service, Code of Conduct, and Liability policies for Rayfelmun '26.">
+    <link rel="canonical" href="https://rayfelmun.org/terms.html" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" type="image/png" sizes="256x256" href="rayfelmunLogo.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="rayfelmunLogo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="rayfelmunLogo.png">
+    <link rel="apple-touch-icon" href="rayfelmunLogo.png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        @font-face {
+            font-family: 'Northwell';
+            src: url('Northwell.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        /* Added Formula1 Display Bold Font */
+        @font-face {
+            font-family: 'Formula1';
+            src: url('Formula1-Display-Bold.otf') format('opentype'),
+                 url('Formula1-Display-Bold.ttf') format('truetype');
+            font-weight: bold;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #142948;
+            overflow-x: hidden;
+        }
+
+        nav {
+            background: linear-gradient(to bottom, #142948 0%, rgb(21,21,30) 100%);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .logo-area { display: flex; align-items: center; gap: 15px; text-decoration: none; z-index: 1001; }
+        .logo-area img { height: 50px; width: auto; }
+        .logo-area span { font-family: 'Northwell', cursive; font-size: 34px; color: #ffffff; }
+
+        .menu-toggle { display: none; color: white; font-size: 24px; cursor: pointer; z-index: 1001; }
+
+        .nav-right { display: flex; align-items: center; gap: 25px; }
+        .nav-links { list-style: none; display: flex; gap: 18px; }
+        .nav-links a { color: #ffffff; text-decoration: none; text-transform: uppercase; font-size: 11px; font-weight: 700; letter-spacing: 1.2px; opacity: 0.7; transition: 0.3s; }
+        .nav-links a:hover, .nav-links a.active { opacity: 1; color: #27f4d2; }
+
+        .apply-btn-nav { background-color: #111111; color: white; padding: 10px 24px; border-radius: 30px; text-decoration: none; font-weight: 800; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; border: 1px solid rgba(255,255,255,0.15); transition: 0.3s; }
+        .apply-btn-nav:hover { background: white; color: #142948; transform: translateY(-2px); }
+
+        .legal-section { padding: 160px 5% 100px 5%; max-width: 900px; margin: 0 auto; }
+        .legal-header { text-align: center; margin-bottom: 50px; }
+        .legal-header .label { font-family: 'Northwell', cursive; font-size: clamp(60px, 12vw, 80px); color: #142948; margin-bottom: -10px; display: block; }
+        
+        /* Updated to use Formula1 font */
+        .legal-header h1 { font-family: 'Formula1', 'Antonio', sans-serif; font-size: clamp(32px, 8vw, 60px); text-transform: uppercase; letter-spacing: -1px; margin-bottom: 15px; color: #142948; line-height: 1; }
+        
+        .legal-header .subtitle { font-size: clamp(14px, 4vw, 18px); color: #666; font-weight: 300; }
+
+        .legal-card { background: #f8f9fa; border-radius: 25px; padding: clamp(25px, 5vw, 50px); border: 1px solid #eee; box-shadow: 0 10px 30px rgba(20, 41, 72, 0.04); }
+        
+        /* Updated to use Formula1 font */
+        .legal-card h2 { font-family: 'Formula1', 'Antonio', sans-serif; font-size: 22px; color: #142948; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 35px; margin-bottom: 15px; border-bottom: 1px solid #ddd; padding-bottom: 8px; }
+        .legal-card h2:first-of-type { margin-top: 0; }
+        
+        /* Added styling for h3 headers */
+        .legal-card h3 { font-family: 'Formula1', 'Antonio', sans-serif; font-size: 16px; color: #142948; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 25px; margin-bottom: 10px; }
+
+        .legal-card p { font-size: 15px; line-height: 1.8; color: #444; margin-bottom: 15px; text-align: justify; }
+        .legal-card ul { margin-bottom: 25px; padding-left: 20px; }
+        .legal-card li { font-size: 15px; line-height: 1.8; color: #444; margin-bottom: 8px; }
+
+        .update-date { display: inline-block; background: rgba(39, 244, 210, 0.15); color: #142948; font-weight: 600; font-size: 12px; padding: 6px 16px; border-radius: 20px; margin-bottom: 25px; }
+
+        footer { background-color: rgb(21,21,30); padding: 80px 8% 40px 8%; display: grid; grid-template-columns: 1.8fr 1fr 1fr 1fr; gap: 40px; color: white; align-items: start; }
+        .footer-brand img { width: 250px; height: auto; margin-bottom: 25px; display: block; }
+        
+        /* Updated to use Formula1 font */
+        .footer-brand h2 { font-family: 'Formula1', 'Antonio', sans-serif; font-size: 36px; text-transform: uppercase; line-height: 1.1; }
+        .footer-brand h2 span { color: #27f4d2; font-family: 'Formula1', 'Antonio', sans-serif; }
+        
+        .footer-brand p { opacity: 0.6; font-style: italic; margin-top: 10px; font-size: 15px; }
+        .footer-col h4 { font-size: 12px; letter-spacing: 2px; margin-bottom: 25px; color: #27f4d2; text-transform: uppercase; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 12px; }
+        .footer-col ul li a { color: white; text-decoration: none; opacity: 0.6; transition: 0.3s; font-size: 13px; font-weight: 600; text-transform: uppercase; }
+        .footer-col ul li a:hover { opacity: 1; color: #27f4d2; padding-left: 5px; }
+
+        .social-icons { display: flex; gap: 20px; }
+        .social-icons a { color: white; }
+        .social-icons i { font-size: 22px; opacity: 0.7; transition: 0.3s; cursor: pointer; }
+        .social-icons i:hover { opacity: 1; color: #27f4d2; transform: translateY(-3px); }
+
+        .bottom-bar { background-color: #65001a; padding: 30px 8%; display: flex; justify-content: space-between; border-top: 1px solid rgba(255,255,255,0.05); font-size: 12px; color: rgba(255,255,255,0.5); }
+
+        @media (max-width: 968px) { footer { grid-template-columns: 1.5fr 1fr; } }
+        @media (max-width: 768px) {
+            .menu-toggle { display: block; }
+            .nav-right { position: fixed; top: 0; right: -100%; width: 80%; height: 100vh; background: rgb(21,21,30); flex-direction: column; justify-content: center; gap: 40px; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); z-index: 1000; box-shadow: -10px 0 30px rgba(0,0,0,0.5); }
+            .nav-right.active { right: 0; }
+            .nav-links { flex-direction: column; align-items: center; gap: 25px; }
+            .nav-links a { font-size: 16px; opacity: 1; }
+            .legal-section { padding-top: 140px; }
+            footer { grid-template-columns: 1fr; text-align: center; }
+            .footer-brand img { margin: 0 auto 20px auto; width: 200px; }
+            .social-icons { justify-content: center; }
+            .bottom-bar { flex-direction: column; gap: 15px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo-area">
+            <img src="rayfelmunLogo.jpg" alt="Rayfelmun Logo">
+            <span>Rayfelmun</span>
+        </a>
+        <div class="menu-toggle" id="mobile-menu">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class="nav-right" id="nav-menu">
+            <ul class="nav-links">
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="about.html">ABOUT</a></li>
+                <li><a href="team.html">TEAM</a></li>
+                <li><a href="committees.html">COMMITTEES</a></li> 
+                <li><a href="calendar.html">CALENDAR</a></li>
+                <li><a href="venue.html">VENUE</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">CONTACT</a></li>
+            </ul>
+            <a href="apply.html" class="apply-btn-nav">APPLY NOW</a>
+        </div>
+    </nav>
+
+    <section class="legal-section">
+        <div class="legal-header">
+            <span class="label">Legal</span>
+            <h1>Terms of Service</h1>
+            <p class="subtitle">"Mandatory Guidelines, Rules & Liability Policies"</p>
+        </div>
+
+        <div class="legal-card">
+            <span class="update-date">EFFECTIVE AS OF: AUGUST 2026</span>
+
+            <p>This Terms and Conditions document ("Agreement") determines the rules and principles that all participants ("Participant"), including all delegates, group delegations, advisors, observers, and press team members attending the Rayfel Model United Nations conference organized by the <strong>RayfelMUN Organization Committee</strong> ("Organization"), are obliged to comply with.</p>
+            <p>Every Participant who applies, makes a payment, or is present at the conference venue declares that they have read, understood, and unconditionally accepted all the terms and conditions set forth in this document.</p>
+
+            <h2>1. Definitions</h2>
+            <ul>
+                <li><strong>Conference:</strong> Refers to the Model United Nations simulation event organized by the RayfelMUN Organization Committee.</li>
+                <li><strong>Organization Committee:</strong> Refers to the authorized team (Secretariat and Executive Board) responsible for the execution of the conference and the management of academic and logistical processes.</li>
+                <li><strong>Participant:</strong> Refers to each individual attending the conference as a delegate, delegation leader, advisor, observer, or press member.</li>
+                <li><strong>Party:</strong> Refers to the RayfelMUN Organization Committee or the Participant, depending on the individual context.</li>
+            </ul>
+
+            <h2>2. Registration and Application Guidelines</h2>
+            <h3>2.1. Application Accuracy</h3>
+            <p>The Participant commits that all information provided in the application form (name, date of birth, school, contact information, health status, etc.) is accurate, complete, and up-to-date. In case of false or misleading information, the Organization Committee reserves the right to reject the application or cancel the participation without a refund.</p>
+            
+            <h3>2.2. Acceptance and Allocations</h3>
+            <ul>
+                <li>Committee and country allocations are made by the academic team of the Organization Committee by evaluating the Participant's experience, preferences, and motivation.</li>
+                <li>The Organization Committee reserves the right to make changes in committee or country distributions.</li>
+                <li>Dissatisfaction with the allocated country or committee does not warrant a refund.</li>
+            </ul>
+
+            <h2>3. Payment, Cancellation, and Refund Policy</h2>
+            <h3>3.1. Fee Payments</h3>
+            <p>For the participation to be finalized, the determined conference participation fee must be transferred to the specified official bank account or payment channel by the given deadline, and the receipt must be delivered to the Organization Committee.</p>
+            
+            <h3>3.2. Cancellation and Refund Conditions</h3>
+            <ul>
+                <li><strong>Early Cancellation:</strong> For written cancellation requests made before the specified final refund date, the remaining amount may be refunded after administrative deductions are made.</li>
+                <li><strong>Late Cancellation:</strong> No refunds will be made for cancellation requests submitted after the specified date.</li>
+                <li><strong>Transfer of Rights:</strong> The right to participate cannot be transferred or sold to another person without the written consent of the Organization Committee.</li>
+            </ul>
+
+            <h2>4. Conference Rules and Code of Conduct</h2>
+            <p>RayfelMUN is committed to providing a safe, inclusive, academic, and professional environment for all participants.</p>
+            
+            <h3>4.1. Official Dress Code (Western Business Attire)</h3>
+            <ul>
+                <li><strong>Western Business Attire (WBA)</strong> is strictly mandatory during all sessions throughout the conference.</li>
+                <li>Entry to the session halls wearing sportswear, jeans, t-shirts, slippers, or inappropriate clothing is not permitted.</li>
+                <li>Participants who do not comply with the dress code will be warned; if the violation continues, they may be removed from the session.</li>
+            </ul>
+            
+            <h3>4.2. Respect and Zero Tolerance Policy</h3>
+            <ul>
+                <li>Any form of discrimination (race, religion, gender, sexual orientation, nationality, disability, etc.), psychological pressure, verbal or physical harassment, or bullying is strictly prohibited.</li>
+                <li>Behaviors exceeding the boundaries of courtesy towards the Committee Chairs, the organization team, and other delegates constitute a disciplinary offense.</li>
+            </ul>
+            
+            <h3>4.3. Tobacco, Alcohol, and Prohibited Substances</h3>
+            <ul>
+                <li>The use of alcohol, drugs, and tobacco products, including electronic cigarettes, is strictly prohibited throughout the conference and within the conference area (including indoor and outdoor spaces).</li>
+                <li>Participants who violate this ban will be immediately dismissed from the conference, no refund will be issued, and if necessary, the situation will be reported to law enforcement and/or the Participant's school administration.</li>
+            </ul>
+            
+            <h3>4.4. Attendance Requirement and Certification</h3>
+            <ul>
+                <li>In order to be eligible for a certificate, the Participant must attend at least <strong>80%</strong> of the sessions and show active participation.</li>
+                <li>Delegates who do not attend the sessions or arrive late without a valid excuse will not be awarded a Certificate of Participation.</li>
+            </ul>
+
+            <h2>5. Media, Visual, and Intellectual Property Rights</h2>
+            <h3>5.1. Visual and Audio Recording Consent</h3>
+            <p>The Participant agrees to be included in photographs, videos, and audio recordings taken by the Organization Committee or authorized press team during the conference.</p>
+            
+            <h3>5.2. Use of Media Materials</h3>
+            <p>The Organization Committee reserves the right to use the obtained visual and audio materials on RayfelMUN's official website, social media accounts, promotional brochures, and announcements of future events without paying any royalties.</p>
+            
+            <h3>5.3. Intellectual Property</h3>
+            <ul>
+                <li>The RayfelMUN logo, academic documents (Study Guide, Position Paper templates, etc.), and all written/visual materials belonging to the conference are the property of RayfelMUN.</li>
+                <li>Plagiarism in documents prepared by the Participants (Resolution Paper, Position Paper) is strictly prohibited. Documents containing plagiarism are considered invalid, and the respective delegate cannot be nominated for an award.</li>
+            </ul>
+
+            <h2>6. Protection of Personal Data (GDPR / KVKK)</h2>
+            <h3>6.1. Data Collection and Processing</h3>
+            <p>The Organization Committee processes personal data provided by the Participant (name, contact information, school, photograph, etc.) solely for the purposes of conference organization, accreditation procedures, security provision, and communication.</p>
+            
+            <h3>6.2. Data Sharing</h3>
+            <p>Personal data is not shared with third parties or sold for commercial purposes, except when required by legal obligations and accommodation/transportation logistics.</p>
+
+            <h2>7. Limitation of Liability and Health/Safety</h2>
+            <h3>7.1. Personal Belongings</h3>
+            <p>Participants are solely responsible for the safety of their personal belongings (laptops, phones, bags, jewelry, etc.) during the conference. The Organization Committee cannot be held liable for lost, stolen, or damaged items.</p>
+            
+            <h3>7.2. Health Conditions and Medical Intervention</h3>
+            <ul>
+                <li>The Participant is obliged to declare any existing chronic illnesses, allergies, or regular medications on the application form.</li>
+                <li>In medical emergencies, the Organization Committee has the authority to call for first aid or refer the Participant to the nearest healthcare facility on their behalf. Any resulting health expenses belong to the Participant or their legal guardian.</li>
+            </ul>
+            
+            <h3>7.3. Damage and Compensation</h3>
+            <p>Any material/moral damage caused by the Participant to the conference venue, hotel equipment, technical devices, or third parties shall be compensated directly by the Participant (or their legal guardian) who caused the damage.</p>
+
+            <h2>8. Amendments and Force Majeure</h2>
+            <h3>8.1. Force Majeure</h3>
+            <p>The conference may need to be postponed, canceled, or moved to an online format due to natural disasters, pandemics, adverse weather conditions, restriction decisions taken by official authorities, social events, or extraordinary situations beyond the control of the Organization Committee.</p>
+            
+            <h3>8.2. Exemption from Liability</h3>
+            <p>In case of postponements or format changes arising from force majeure, the Organization Committee cannot be held liable for indirect damages such as transportation, accommodation, or other expenses.</p>
+            
+            <h3>8.3. Updating of Terms</h3>
+            <p>The Organization Committee reserves the right to make changes to this Terms and Conditions document when deemed necessary. The updated text becomes effective as soon as it is published through official communication channels.</p>
+
+            <h2>9. Communication and Dispute Resolution</h2>
+            <p>In any dispute that may arise from the implementation or interpretation of this Terms and Conditions document, good faith negotiation between the Organization Committee and the Participant shall be sought first. In unresolved cases, the legislation and authorized courts of the Republic of Turkey shall prevail.</p>
+            <ul>
+                <li><strong>Email:</strong> info@rayfelmun.org</li>
+                <li><strong>Official Website:</strong> www.rayfelmun.org</li>
+            </ul>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-brand">
+            <img src="rayfelmunLogo.jpg" alt="Logo">
+            <h2>Rayfelmun<span>26</span></h2>
+            <p>Your voice can change the world</p>
+        </div>
+        <div class="footer-col">
+            <h4>CONFERENCE</h4>
+            <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="about.html">ABOUT</a></li>
+                <li><a href="team.html">TEAM</a></li>
+                <li><a href="committees.html">COMMITTEES</a></li> 
+                <li><a href="calendar.html">CALENDAR</a></li>
+                <li><a href="venue.html">VENUE</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">CONTACT</a></li>
+                <li><a href="apply.html" style="color:#27f4d2;">APPLY NOW</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>LEGAL</h4>
+            <ul>
+                <li><a href="privacy.html">prıvacy polıcy</a></li>
+                <li><a href="terms.html" style="color:#27f4d2;">Terms of Service</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>SOCIAL</h4>
+            <div class="social-icons">
+                <a href="https://www.instagram.com/rayfelmun/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <i class="fab fa-tiktok"></i>
+                <a href="https://www.linkedin.com/school/ramazan-yaman-fen-lisesi/" target="_blank"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="bottom-bar">
+        <div>© Rayfelmun 2026. All rights reserved.</div>
+        <div>Crafted with ❤️ by Ada Özkan</div>
+    </div>
+
+    <script>
+        const menuToggle = document.getElementById('mobile-menu');
+        const navMenu = document.getElementById('nav-menu');
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            const icon = menuToggle.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+    </script>
+</body>
+</html>
