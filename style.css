@@ -9,12 +9,12 @@
 /* --- TEMA DEĞİŞKENLERİ --- */
 :root {
     --bg-main: rgb(21, 21, 30);
-    --bg-nav: linear-gradient(to bottom, #142948 0%, rgb(21, 21, 30) 100%);
+    --bg-nav: linear-gradient(to bottom, #5c0012 0%, rgb(21, 21, 30) 100%);
     --nav-border: rgba(255, 255, 255, 0.05);
     
     --text-primary: #efefef;       
-    --text-secondary: #142948;     
-    --accent: #27f4d2;             
+    --text-secondary: #5c0012;     
+    --accent: #e8002d;             
     
     --hero-box-bg: rgba(255, 255, 255, 0.6);
     --hero-box-border: rgba(255, 255, 255, 0.2);

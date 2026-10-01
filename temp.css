@@ -16,14 +16,14 @@
 
         body {
             background-color: #ffffff;
-            color: #142948;
+            color: #5c0012;
             line-height: 1.6;
             overflow-x: hidden;
         }
 
         /* --- NAVIGASYON --- */
         nav {
-            background: linear-gradient(to bottom, #142948 0%, rgb(21,21,30) 100%);
+            background: linear-gradient(to bottom, #5c0012 0%, rgb(21,21,30) 100%);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -80,7 +80,7 @@
 
         .nav-links a:hover, .nav-links a.active { 
             opacity: 1; 
-            color: #27f4d2;
+            color: #e8002d;
         }
 
         .apply-btn {
@@ -120,7 +120,7 @@
         .about-label {
             font-family: 'Northwell', cursive;
             font-size: 80px;
-            color: #142948;
+            color: #5c0012;
             display: block;
             margin-bottom: -10px;
             opacity: 0.9;
@@ -131,7 +131,7 @@
             text-transform: uppercase;
             font-size: clamp(32px, 5vw, 55px);
             font-weight: 700;
-            color: #142948;
+            color: #5c0012;
             letter-spacing: -1px;
             line-height: 1.1;
         }
@@ -150,7 +150,7 @@
         }
 
         .story-container {
-            background-color: #142948;
+            background-color: #5c0012;
             color: #ffffff;
             padding: 80px;
             border-radius: 50px;
@@ -190,7 +190,7 @@
             font-size: 42px;
             text-transform: uppercase;
             margin-bottom: 25px;
-            color: #27f4d2;
+            color: #e8002d;
         }
 
         .story-content p {
@@ -220,10 +220,10 @@
         }
 
         .footer-brand h2 { font-family: 'Antonio', sans-serif; font-size: 36px; text-transform: uppercase; }
-        .footer-brand h2 span { color: #27f4d2; }
+        .footer-brand h2 span { color: #e8002d; }
         .footer-brand p { opacity: 0.6; font-style: italic; margin-top: 10px; font-size: 15px; }
 
-        .footer-col h4 { font-size: 12px; letter-spacing: 2px; margin-bottom: 25px; color: #27f4d2; text-transform: uppercase; }
+        .footer-col h4 { font-size: 12px; letter-spacing: 2px; margin-bottom: 25px; color: #e8002d; text-transform: uppercase; }
         .footer-col ul { list-style: none; }
         .footer-col ul li { margin-bottom: 12px; }
         .footer-col ul li a { 
@@ -235,12 +235,12 @@
             text-transform: uppercase;
             font-weight: 600;
         }
-        .footer-col ul li a:hover { opacity: 1; color: #27f4d2; padding-left: 5px; }
+        .footer-col ul li a:hover { opacity: 1; color: #e8002d; padding-left: 5px; }
 
         .social-icons { display: flex; gap: 20px; }
         .social-icons a { color: white; text-decoration: none; }
         .social-icons i { font-size: 22px; opacity: 0.7; transition: 0.3s; cursor: pointer; }
-        .social-icons i:hover { opacity: 1; color: #27f4d2; transform: translateY(-3px); }
+        .social-icons i:hover { opacity: 1; color: #e8002d; transform: translateY(-3px); }
 
         .bottom-bar {
             background-color: rgb(21,21,30);

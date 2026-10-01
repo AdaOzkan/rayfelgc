@@ -29,16 +29,16 @@
         .form-header {
             text-align: center;
             margin-bottom: 25px;
-            border-bottom: 2px solid #27f4d2;
+            border-bottom: 2px solid #e8002d;
             padding-bottom: 15px;
         }
         .form-header h2 {
-            color: #27f4d2;
+            color: #e8002d;
             margin: 0;
             text-transform: uppercase;
         }
         .section-title {
-            color: #27f4d2;
+            color: #e8002d;
             border-bottom: 1px solid rgba(255,255,255,0.1);
             padding-bottom: 5px;
             margin-top: 20px;
@@ -64,7 +64,7 @@
         input, select, textarea {
             width: 100%;
             padding: 10px;
-            background-color: #142948;
+            background-color: #5c0012;
             border: 1px solid #3b204e;
             border-radius: 6px;
             color: #ffffff;
@@ -73,13 +73,13 @@
         }
         input:focus, select:focus, textarea:focus {
             outline: none;
-            border-color: #27f4d2;
+            border-color: #e8002d;
         }
         button {
             width: 100%;
             padding: 12px;
-            background-color: #27f4d2;
-            color: #142948;
+            background-color: #e8002d;
+            color: #5c0012;
             font-weight: bold;
             border: none;
             border-radius: 6px;
@@ -228,7 +228,7 @@
 
         emailjs.sendForm(serviceID, templateID, this)
             .then(function() {
-                statusMsg.style.color = "#27f4d2";
+                statusMsg.style.color = "#e8002d";
                 statusMsg.innerText = "Başvurunuz başarıyla gönderildi!";
                 document.getElementById('delegateForm').reset();
                 submitBtn.disabled = false;
